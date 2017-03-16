@@ -1,0 +1,13 @@
+{
+  "generator-angular-library": {
+    "githubUsername": "dreebit",
+    "githubRepoName": "ng-messenger",
+    "npmModuleName": "ng-messenger",
+    "moduleGlobal": "ngMessenger",
+    "ngModuleName": "NgMessengerModule",
+    "selectorPrefix": "ngm",
+    "projectTitle": "ng-messenger",
+    "projectDescription": "Messaging components",
+    "authorName": "Toni Möckel"
+  }
+}
