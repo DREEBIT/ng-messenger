@@ -5,27 +5,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var helloWorld_component_1 = require('./helloWorld.component');
-var NgMessengerModule = (function () {
-    function NgMessengerModule() {
-    }
-    NgMessengerModule.forRoot = function () {
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+const core_1 = require('@angular/core');
+const common_1 = require('@angular/common');
+const conversation_list_component_1 = require("./components/conversation-list/conversation-list.component");
+const holder_directive_1 = require("./directives/holder.directive");
+const angular2_moment_1 = require("angular2-moment");
+let NgMessengerModule_1 = class NgMessengerModule {
+    static forRoot() {
         return {
-            ngModule: NgMessengerModule
+            ngModule: NgMessengerModule_1
         };
-    };
-    NgMessengerModule = __decorate([
-        core_1.NgModule({
-            declarations: [
-                helloWorld_component_1.HelloWorldComponent
-            ],
-            imports: [common_1.CommonModule],
-            exports: [helloWorld_component_1.HelloWorldComponent]
-        })
-    ], NgMessengerModule);
-    return NgMessengerModule;
-}());
+    }
+};
+let NgMessengerModule = NgMessengerModule_1;
+NgMessengerModule = NgMessengerModule_1 = __decorate([
+    core_1.NgModule({
+        declarations: [
+            conversation_list_component_1.ConversationListComponent,
+            holder_directive_1.HolderDirective
+        ],
+        imports: [
+            common_1.CommonModule,
+            angular2_moment_1.MomentModule
+        ],
+        exports: [conversation_list_component_1.ConversationListComponent]
+    }), 
+    __metadata('design:paramtypes', [])
+], NgMessengerModule);
 exports.NgMessengerModule = NgMessengerModule;
 //# sourceMappingURL=ngMessenger.module.js.map

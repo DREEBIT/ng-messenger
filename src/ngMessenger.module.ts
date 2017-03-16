@@ -1,13 +1,19 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HelloWorldComponent } from './helloWorld.component';
+import {ConversationListComponent} from "./components/conversation-list/conversation-list.component";
+import {HolderDirective} from "./directives/holder.directive";
+import {MomentModule} from "angular2-moment";
 
 @NgModule({
   declarations: [
-    HelloWorldComponent
+    ConversationListComponent,
+    HolderDirective
   ],
-  imports: [CommonModule],
-  exports: [HelloWorldComponent]
+  imports: [
+    CommonModule,
+    MomentModule
+  ],
+  exports: [ConversationListComponent]
 })
 export class NgMessengerModule {
 

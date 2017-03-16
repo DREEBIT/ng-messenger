@@ -4,19 +4,20 @@ import {
   TestBed
 } from '@angular/core/testing';
 import { expect } from 'chai';
-import { HelloWorldComponent } from './../src/helloWorld.component';
-import { NgMessengerModule } from '../src';
 
-describe('ngm-hello-world component', () => {
+import { NgMessengerModule } from '../src';
+import {ConversationListComponent} from "../src/components/conversation-list/conversation-list.component";
+
+describe('ngm-conversation-list component', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({imports: [NgMessengerModule.forRoot()]});
   });
 
   it('should say hello world', () => {
-    const fixture: ComponentFixture<HelloWorldComponent> = TestBed.createComponent(HelloWorldComponent);
+    const fixture: ComponentFixture<ConversationListComponent> = TestBed.createComponent(ConversationListComponent);
     fixture.detectChanges();
-    expect(fixture.nativeElement.innerHTML.trim()).to.equal('Hello world from the ng-messenger module!');
+
   });
 
 });

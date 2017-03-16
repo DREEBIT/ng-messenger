@@ -38,8 +38,16 @@ export default config => {
           enforce: 'pre'
         }, {
           test: /\.ts$/,
-          loader: 'awesome-typescript-loader',
+          loaders: ['awesome-typescript-loader', 'angular2-template-loader?keepUrl=true'],
           exclude: /node_modules/
+        },{
+          test: /\.html$/,
+          use: [ {
+            loader: 'html-loader',
+            options: {
+              minimize: true
+            }
+          }]
         }, {
           test: /sinon.js$/,
           loader: 'imports-loader?define=>false,require=>false'
@@ -48,6 +56,15 @@ export default config => {
           exclude: /(node_modules|\.spec\.ts$)/,
           loader: 'istanbul-instrumenter-loader',
           enforce: 'post'
+        },{
+          test: /\.scss$/,
+          use: [{
+            loader: "style-loader" // creates style nodes from JS strings
+          }, {
+            loader: "css-loader" // translates CSS into CommonJS
+          }, {
+            loader: "sass-loader" // compiles Sass to CSS
+          }]
         }]
       },
       plugins: [

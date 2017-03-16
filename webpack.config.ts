@@ -1,6 +1,10 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
 const IS_PROD: boolean = process.argv.indexOf('-p') > -1;
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const extractSass = new ExtractTextPlugin({
+  filename: "[name].[contenthash].css",
+});
 
 export default {
   devtool: IS_PROD ? 'source-map' : 'eval',
@@ -17,8 +21,16 @@ export default {
       enforce: 'pre'
     }, {
       test: /\.ts$/,
-      loader: 'awesome-typescript-loader',
+      loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
       exclude: /node_modules/
+    },{
+      test: /\.html$/,
+      loader: 'html-loader',
+      exclude: /node_modules/
+    },{
+      test: /\.scss$/,
+      exclude: /node_modules/,
+      loaders: ['raw-loader', 'sass-loader'] // sass-loader not scss-loader
     }]
   },
   resolve: {
@@ -39,6 +51,7 @@ export default {
     new webpack.ContextReplacementPlugin(
       /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
       path.join(__dirname, 'src')
-    )
+    ),
+    extractSass
   ]
 };

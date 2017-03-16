@@ -5,12 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
     <title>ng-messenger</title>
     <style type="text/css">
       .container-demo {
         margin-top: 70px;
       }
+
+      .border-left {
+        border-left: 1px solid #bbbbbb;
+      }
+
+      .border-right {
+        border-right: 1px solid #bbbbbb;
+      }
+
+      .full-height {
+        height: 100%;
+      }
+
+      .fill {
+        top: 0px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        width: auto;
+        height: auto;
+      }
     </style>
+
   </head>
   <body>
 
@@ -35,11 +59,13 @@
       </div>
     </nav>
 
-    <div class="container-fluid container-demo">
+    <div class="container-fluid container-demo fill">
       <ngm-demo-app>Loading demo...</ngm-demo-app>
     </div>
 
+    <script src="//cdn.rawgit.com/imsky/holder/master/holder.js"></script>
     <script src="demo.js" async></script>
+
 
   </body>
 </html>

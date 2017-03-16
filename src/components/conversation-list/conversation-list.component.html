@@ -1,0 +1,23 @@
+<div class="ngm-conversation-list">
+  <div class="media conversation-list-item" *ngFor="let item of conversations">
+    <div class="media-left media-middle">
+      <img class="media-object img-circle" src="{{item.image}}" *ngIf="item.image">
+      <img class="media-object img-circle" *ngIf="!item.image" ngm-holder [config]="{text: 'TM'}">
+    </div>
+    <div class="media-body">
+      <div class="media-heading">
+        <span *ngIf="item.info" class="pull-right">{{item.info}}</span>
+        <span class="title">{{item.title}}</span>
+      </div>
+      <div class="media-text text-muted" >
+        <span *ngIf f="item.subtitle">{{item.subtitle}}</span>
+        <span *ngIf="!item.subtitle">{{item.update | amTimeAgo}}</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="!conversations || conversations.length === 0" class="">
+    <p>{{emptyMessage}}</p>
+  </div>
+</div>
