@@ -1,10 +1,27 @@
-<nav class="navbar navbar-default ngm-conversation-header">
-  <div class="">
-    <div class="text-center ngm-conversation-title">
-      {{conversationDetailItem.title}}
+<div class="ngm-messages-list" ngm-scroll-down style="height: 100%; overflow: hidden; overflow-y: scroll">
+
+  <div class="ngm-message-list-item-wrapper {{messages.cssClass}}"
+       [ngClass]="{
+         'from-me': (message.author.id === author.id),
+         'from-them': !(message.author.id === author.id)
+         }"
+       *ngFor="let message of messages; let i = index;">
+
+
+    <div class="ngm-message-list-item ngm-message-bubble"
+         [ngClass]="{'ngm-message-bubble-arrow': !message.hideAvatar}"
+         ngm-tooltip [attr.data-toggle]="'tooltip'" [attr.data-placement]="message.author.id === author.id ? 'left': 'right'"
+         title="{{ message.insert | amTimeAgo }}"
+    >
+      <p>{{message.text}}</p>
     </div>
-    <div class="text-center ngm-conversation-subtitle text-muted">
-      {{conversationDetailItem.update | amTimeAgo}}
+    <div class="clear"></div>
+    <div class="ngm-messages-avatar" *ngIf="!message.hideAvatar">
+      <img class="img-circle" src="{{message.avatar}}" *ngIf="message.avatar">
+      <img class="img-circle" *ngIf="!message.avatar" ngm-holder [config]="{text: 'TM', width: 20, height: 20, size: 6}">
     </div>
+    <div class="clear"></div>
+
   </div>
-</nav>
+
+</div>

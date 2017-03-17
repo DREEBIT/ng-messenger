@@ -12,9 +12,9 @@
     </div>
 
   </div>
-  <div class="col-lg-9 col-md-8">
+  <div class="col-lg-9 col-md-8" style="height: 100%;">
     <div class="" style="margin-left: -15px; margin-right: -15px;">
-      <ngm-conversation-detail [conversationDetailItem]="conversationDetailItem"></ngm-conversation-detail>
+      <ngm-conversation-detail [author]="user" [conversationDetailItem]="conversationDetailItem" [messages]="messages"></ngm-conversation-detail>
     </div>
   </div>
 </div>

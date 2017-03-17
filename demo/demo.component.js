@@ -6,10 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require('@angular/core');
+var _ = require('lodash');
 var conversations = require("./demo.conversation.list.json");
+var messages = require("./demo.messages.list.json");
 var DemoComponent = (function () {
     function DemoComponent() {
         this.conversationListItems = [];
+        this.messages = [];
+        this.user = {
+            id: 'userA',
+            name: 'userA'
+        };
     }
     DemoComponent.prototype.ngOnInit = function () {
         var tmp = conversations.slice(0, 50);
@@ -21,6 +28,20 @@ var DemoComponent = (function () {
                 update: item.update,
                 info: item.info,
                 image: item.image
+            };
+        });
+        this.messages = _.orderBy(messages, ['insert'], ['desc']).slice(0, 50).map(function (item) {
+            return {
+                id: item.id,
+                text: item.text,
+                insert: item.insert,
+                update: item.update,
+                image: item.image,
+                read: item.read,
+                author: {
+                    id: item.ownerId,
+                    name: item.ownerId
+                }
             };
         });
         this.conversationDetailItem = this.conversationListItems[0];

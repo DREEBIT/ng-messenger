@@ -17,6 +17,14 @@ __decorate([
     core_1.Input(), 
     __metadata('design:type', Object)
 ], ConversationDetailComponent.prototype, "conversationDetailItem", void 0);
+__decorate([
+    core_1.Input(), 
+    __metadata('design:type', Array)
+], ConversationDetailComponent.prototype, "messages", void 0);
+__decorate([
+    core_1.Input(), 
+    __metadata('design:type', Object)
+], ConversationDetailComponent.prototype, "author", void 0);
 ConversationDetailComponent = __decorate([
     core_1.Component({
         selector: 'ngm-conversation-detail',

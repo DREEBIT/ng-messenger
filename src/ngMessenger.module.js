@@ -16,6 +16,8 @@ const holder_directive_1 = require("./directives/holder.directive");
 const angular2_moment_1 = require("angular2-moment");
 const conversation_header_component_1 = require("./components/conversation-header/conversation-header.component");
 const messages_list_component_1 = require("./components/messages-list/messages-list.component");
+const scroll_down_directive_1 = require("./directives/scroll-down.directive");
+const tooltip_directive_1 = require("./directives/tooltip.directive");
 let NgMessengerModule_1 = class NgMessengerModule {
     static forRoot() {
         return {
@@ -31,7 +33,9 @@ NgMessengerModule = NgMessengerModule_1 = __decorate([
             conversation_detail_component_1.ConversationDetailComponent,
             conversation_header_component_1.ConversationHeaderComponent,
             messages_list_component_1.MessagesListComponent,
-            holder_directive_1.HolderDirective
+            holder_directive_1.HolderDirective,
+            scroll_down_directive_1.ScrollDownDirective,
+            tooltip_directive_1.TooltipDirective
         ],
         imports: [
             common_1.CommonModule,

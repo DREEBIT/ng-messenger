@@ -11,8 +11,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = require("@angular/core");
 let MessagesListComponent = class MessagesListComponent {
     ngOnInit() {
+        this.messages = this.analyseItems(this.messages);
+    }
+    analyseItems(items) {
+        return items.reverse().map((item, index, array) => {
+            let message = item;
+            let pre = null;
+            let next = null;
+            if (index > 0) {
+                pre = array[index - 1];
+            }
+            if (index + 1 < array.length) {
+                next = array[index + 1];
+            }
+            item.hideAvatar = !this.shouldShowArrow(message, pre, next);
+            return item;
+        });
+    }
+    shouldShowArrow(message, pre, next) {
+        if (!next || next.author.id !== message.author.id) {
+            return true;
+        }
+        return false;
     }
 };
+__decorate([
+    core_1.Input(), 
+    __metadata('design:type', Array)
+], MessagesListComponent.prototype, "messages", void 0);
+__decorate([
+    core_1.Input(), 
+    __metadata('design:type', Object)
+], MessagesListComponent.prototype, "author", void 0);
 MessagesListComponent = __decorate([
     core_1.Component({
         selector: 'ngm-messages-list',

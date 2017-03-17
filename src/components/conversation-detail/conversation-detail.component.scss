@@ -1,3 +1,11 @@
-.ngm-conversation-title {
+.ngm-conversation-detail {
+  height: 100%;
 
+  .ngm-conversation-messages-container {
+    position: absolute;
+    top: 50px;
+    bottom: 50px;
+    width: 100%;
+    overflow: hidden;
+  }
 }

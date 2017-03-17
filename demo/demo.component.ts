@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ConversationListItem} from "../src/models/conversation-list-item.model";
 import {ConversationDetailItem} from "../src/models/conversation-detail.model";
+import {Message} from "../src/models/message.model";
+import {Author} from "../src/models/author.model";
+const _ = require('lodash');
 
 const conversations = require("./demo.conversation.list.json");
+const messages = require("./demo.messages.list.json");
 
 @Component({
   selector: 'ngm-demo-app',
@@ -12,7 +16,14 @@ export class DemoComponent implements OnInit{
 
   conversationListItems: ConversationListItem[] = [];
 
+  messages: Message[] = [];
+
   conversationDetailItem: ConversationDetailItem;
+
+  user: Author = {
+    id: 'userA',
+    name: 'userA'
+  };
 
   activeItemId: string;
 
@@ -27,6 +38,22 @@ export class DemoComponent implements OnInit{
         update: item.update,
         info: item.info,
         image: item.image
+      }
+    });
+
+
+    this.messages = _.orderBy(messages,['insert'],['desc']).slice(0,50).map((item)=>{
+      return {
+        id: item.id,
+        text: item.text,
+        insert: item.insert,
+        update: item.update,
+        image: item.image,
+        read: item.read,
+        author: {
+          id: item.ownerId,
+          name: item.ownerId
+        }
       }
     });
 
