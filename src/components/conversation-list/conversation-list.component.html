@@ -1,20 +1,23 @@
 <div class="ngm-conversation-list">
-  <div class="media conversation-list-item" *ngFor="let item of conversations">
-    <div class="media-left media-middle">
-      <img class="media-object img-circle" src="{{item.image}}" *ngIf="item.image">
-      <img class="media-object img-circle" *ngIf="!item.image" ngm-holder [config]="{text: 'TM'}">
-    </div>
-    <div class="media-body">
-      <div class="media-heading">
-        <span *ngIf="item.info" class="pull-right">{{item.info}}</span>
-        <span class="title">{{item.title}}</span>
+  <div class="ngm-conversation-list-item" (click)="onItemClick(item, $event)" [ngClass]="{'active': item.id === activeItemId, 'highlight': item.highlight}" *ngFor="let item of conversations">
+    <div class="ngm-conversation-list-inner">
+      <div class="conversation-list-item-avatar">
+        <img class="img-circle" src="{{item.image}}" *ngIf="item.image">
+        <img class="img-circle" *ngIf="!item.image" ngm-holder [config]="{text: 'TM'}">
       </div>
-      <div class="media-text text-muted" >
-        <span *ngIf f="item.subtitle">{{item.subtitle}}</span>
-        <span *ngIf="!item.subtitle">{{item.update | amTimeAgo}}</span>
-      </div>
+      <div class="ngm-conversation-body">
+        <div class="ngm-conversation-head">
+          <span *ngIf="item.info" class="pull-right">{{item.info}}</span>
+          <span class="ngm-conversation-title">{{item.title}}</span>
+        </div>
+        <div class="ngm-conversation-subtitle">
+          <span *ngIf="item.subtitle" class="ngm-text-overflow-ellipsis">{{item.subtitle}}</span>
+          <span *ngIf="!item.subtitle">{{item.update | amTimeAgo}}</span>
+        </div>
 
+      </div>
     </div>
+
   </div>
 
   <div *ngIf="!conversations || conversations.length === 0" class="">

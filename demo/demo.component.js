@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require('@angular/core');
-var conversations = require("./demo.conversations.list.json");
+var conversations = require("./demo.conversation.list.json");
 var DemoComponent = (function () {
     function DemoComponent() {
         this.conversationListItems = [];
@@ -14,11 +14,16 @@ var DemoComponent = (function () {
     DemoComponent.prototype.ngOnInit = function () {
         this.conversationListItems = conversations.map(function (item) {
             return {
+                id: item.id,
                 title: item.title,
+                subtitle: item.lastMessage,
                 update: item.update,
-                info: item.info
+                info: item.info,
+                image: item.image
             };
         });
+        this.activeItemId = this.conversationListItems[0].id;
+        this.conversationListItems[2].highlight = true;
     };
     DemoComponent = __decorate([
         core_1.Component({
