@@ -1,14 +1,14 @@
 # ng-messenger
-[![Build Status](https://travis-ci.org/dreebit/ng-messenger.svg?branch=master)](https://travis-ci.org/dreebit/ng-messenger)
-[![codecov](https://codecov.io/gh/dreebit/ng-messenger/branch/master/graph/badge.svg)](https://codecov.io/gh/dreebit/ng-messenger)
+[![Build Status](https://travis-ci.org/tonimoeckel/ng-messenger.svg?branch=master)](https://travis-ci.org/tonimoeckel/ng-messenger)
+[![codecov](https://codecov.io/gh/tonimoeckel/ng-messenger/branch/master/graph/badge.svg)](https://codecov.io/gh/tonimoeckel/ng-messenger)
 [![npm version](https://badge.fury.io/js/ng-messenger.svg)](http://badge.fury.io/js/ng-messenger)
-[![devDependency Status](https://david-dm.org/dreebit/ng-messenger/dev-status.svg)](https://david-dm.org/dreebit/ng-messenger?type=dev)
-[![GitHub issues](https://img.shields.io/github/issues/dreebit/ng-messenger.svg)](https://github.com/dreebit/ng-messenger/issues)
-[![GitHub stars](https://img.shields.io/github/stars/dreebit/ng-messenger.svg)](https://github.com/dreebit/ng-messenger/stargazers)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/dreebit/ng-messenger/master/LICENSE)
+[![devDependency Status](https://david-dm.org/tonimoeckel/ng-messenger/dev-status.svg)](https://david-dm.org/tonimoeckel/ng-messenger?type=dev)
+[![GitHub issues](https://img.shields.io/github/issues/tonimoeckel/ng-messenger.svg)](https://github.com/tonimoeckel/ng-messenger/issues)
+[![GitHub stars](https://img.shields.io/github/stars/tonimoeckel/ng-messenger.svg)](https://github.com/tonimoeckel/ng-messenger/stargazers)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/tonimoeckel/ng-messenger/master/LICENSE)
 
 ## Demo
-https://dreebit.github.io/ng-messenger/demo/
+https://tonimoeckel.github.io/ng-messenger/demo/
 
 ## Table of contents
 
@@ -53,7 +53,7 @@ import { Component } from '@angular/core';
 export class MyComponent {}
 ```
 
-You may also find it useful to view the [demo source](https://github.com/dreebit/ng-messenger/blob/master/demo/demo.component.ts).
+You may also find it useful to view the [demo source](https://github.com/tonimoeckel/ng-messenger/blob/master/demo/demo.component.ts).
 
 ### Usage without a module bundler
 ```
@@ -65,7 +65,7 @@ You may also find it useful to view the [demo source](https://github.com/dreebit
 
 ## Documentation
 All documentation is auto-generated from the source via [compodoc](https://compodoc.github.io/compodoc/) and can be viewed here:
-https://dreebit.github.io/ng-messenger/docs/
+https://tonimoeckel.github.io/ng-messenger/docs/
 
 ## Development
 

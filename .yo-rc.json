@@ -1,6 +1,6 @@
 {
   "generator-angular-library": {
-    "githubUsername": "dreebit",
+    "githubUsername": "tonimoeckel",
     "githubRepoName": "ng-messenger",
     "npmModuleName": "ng-messenger",
     "moduleGlobal": "ngMessenger",
