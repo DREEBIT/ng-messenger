@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ConversationListItem} from "../src/components/conversation-list/conversation-list-item.model";
+import {ConversationListItem} from "../src/models/conversation-list-item.model";
+import {ConversationDetailItem} from "../src/models/conversation-detail.model";
 
 const conversations = require("./demo.conversation.list.json");
 
@@ -11,11 +12,14 @@ export class DemoComponent implements OnInit{
 
   conversationListItems: ConversationListItem[] = [];
 
+  conversationDetailItem: ConversationDetailItem;
+
   activeItemId: string;
 
   ngOnInit(): void {
 
-    this.conversationListItems = conversations.map((item)=>{
+    let tmp = conversations.slice(0,50);
+    this.conversationListItems = tmp.map((item)=>{
       return {
         id: item.id,
         title: item.title,
@@ -26,7 +30,9 @@ export class DemoComponent implements OnInit{
       }
     });
 
-    this.activeItemId = this.conversationListItems[0].id;
+    this.conversationDetailItem = this.conversationListItems[0];
+    this.activeItemId = this.conversationDetailItem.id;
+
 
     this.conversationListItems[2].highlight = true;
 

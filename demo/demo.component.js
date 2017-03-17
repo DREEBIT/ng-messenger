@@ -12,7 +12,8 @@ var DemoComponent = (function () {
         this.conversationListItems = [];
     }
     DemoComponent.prototype.ngOnInit = function () {
-        this.conversationListItems = conversations.map(function (item) {
+        var tmp = conversations.slice(0, 50);
+        this.conversationListItems = tmp.map(function (item) {
             return {
                 id: item.id,
                 title: item.title,
@@ -22,7 +23,8 @@ var DemoComponent = (function () {
                 image: item.image
             };
         });
-        this.activeItemId = this.conversationListItems[0].id;
+        this.conversationDetailItem = this.conversationListItems[0];
+        this.activeItemId = this.conversationDetailItem.id;
         this.conversationListItems[2].highlight = true;
     };
     DemoComponent = __decorate([

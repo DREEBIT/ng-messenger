@@ -1,6 +1,6 @@
 
 import {OnInit, Component, Input, Output, EventEmitter} from "@angular/core";
-import {ConversationListItem} from "./conversation-list-item.model";
+import {ConversationListItem} from "../../models/conversation-list-item.model";
 
 @Component({
   selector: 'ngm-conversation-list',

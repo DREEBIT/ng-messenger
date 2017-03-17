@@ -7,8 +7,10 @@
       </div>
       <div class="ngm-conversation-body">
         <div class="ngm-conversation-head">
-          <span *ngIf="item.info" class="pull-right">{{item.info}}</span>
           <span class="ngm-conversation-title">{{item.title}}</span>
+          <span class="ngm-conversation-info text-muted">
+            <span *ngIf="item.update">{{item.update | amCalendar:{sameDay:'LT',lastDay: 'LT', lastWeek: 'ddd'} }}</span>
+          </span>
         </div>
         <div class="ngm-conversation-subtitle">
           <span *ngIf="item.subtitle" class="ngm-text-overflow-ellipsis">{{item.subtitle}}</span>
