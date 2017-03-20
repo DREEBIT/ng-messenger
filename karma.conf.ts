@@ -14,7 +14,7 @@ export default config => {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/entry.ts'
+      { pattern: './test/entry.ts', watched: false }
     ],
 
     // preprocess matching files before serving them to the browser
@@ -96,7 +96,7 @@ export default config => {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage-istanbul'],
+    reporters: ['progress', 'coverage-istanbul', 'kjhtml'],
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
@@ -104,7 +104,7 @@ export default config => {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
     phantomjsLauncher: {
       // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)

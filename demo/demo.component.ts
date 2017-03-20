@@ -3,6 +3,8 @@ import {ConversationListItem} from "../src/models/conversation-list-item.model";
 import {ConversationDetailItem} from "../src/models/conversation-detail.model";
 import {Message} from "../src/models/message.model";
 import {Author} from "../src/models/author.model";
+import {LoadPerformer} from "../src/classes/paging-loader";
+import {Observable} from "rxjs";
 const _ = require('lodash');
 
 const conversations = require("./demo.conversation.list.json");
@@ -16,14 +18,14 @@ export class DemoComponent implements OnInit{
 
   conversationListItems: ConversationListItem[] = [];
 
-  messages: Message[] = [];
-
   conversationDetailItem: ConversationDetailItem;
 
   user: Author = {
     id: 'userA',
     name: 'userA'
   };
+
+  loadPerformer: LoadPerformer<Message>;
 
   activeItemId: string;
 
@@ -41,21 +43,43 @@ export class DemoComponent implements OnInit{
       }
     });
 
+    this.loadPerformer = {
+      total: -1,
+      performLoad: (start, limit) => {
 
-    this.messages = _.orderBy(messages,['insert'],['desc']).slice(0,50).map((item)=>{
-      return {
-        id: item.id,
-        text: item.text,
-        insert: item.insert,
-        update: item.update,
-        image: item.image,
-        read: item.read,
-        author: {
-          id: item.ownerId,
-          name: item.ownerId
-        }
+        return new Observable((observer)=>{
+
+          this.loadPerformer.total = messages.length;
+          let end = start + limit;
+          let page = messages.slice(start, end).map(function (item) {
+            return {
+              id: item.id,
+              text: item.text,
+              insert: item.insert,
+              update: item.update,
+              image: item.image,
+              read: item.read,
+              author: {
+                id: item.ownerId,
+                name: item.ownerId
+              }
+            };
+          });
+
+          setTimeout(()=>{
+            observer.next(page);
+          },1000);
+
+          setTimeout(() => {
+            observer.complete();
+          }, 2000);
+
+        });
+
       }
-    });
+    };
+
+
 
     this.conversationDetailItem = this.conversationListItems[0];
     this.activeItemId = this.conversationDetailItem.id;

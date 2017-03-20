@@ -1,16 +1,18 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var core_1 = require("@angular/core");
-var ConversationListComponent = (function () {
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+export var ConversationListComponent = (function () {
     function ConversationListComponent() {
         this.emptyMessage = "There are no conversations yet";
-        this.activeItemIdChange = new core_1.EventEmitter();
-        this.onListItemClick = new core_1.EventEmitter();
+        this.activeItemIdChange = new EventEmitter();
+        this.onListItemClick = new EventEmitter();
         this.autoHighlight = true;
     }
     ConversationListComponent.prototype.ngOnInit = function () {
@@ -24,31 +26,37 @@ var ConversationListComponent = (function () {
         this.onListItemClick.emit(item);
     };
     __decorate([
-        core_1.Input()
-    ], ConversationListComponent.prototype, "conversations");
+        Input(), 
+        __metadata('design:type', Array)
+    ], ConversationListComponent.prototype, "conversations", void 0);
     __decorate([
-        core_1.Input()
-    ], ConversationListComponent.prototype, "emptyMessage");
+        Input(), 
+        __metadata('design:type', String)
+    ], ConversationListComponent.prototype, "emptyMessage", void 0);
     __decorate([
-        core_1.Input()
-    ], ConversationListComponent.prototype, "activeItemId");
+        Input(), 
+        __metadata('design:type', String)
+    ], ConversationListComponent.prototype, "activeItemId", void 0);
     __decorate([
-        core_1.Output()
-    ], ConversationListComponent.prototype, "activeItemIdChange");
+        Output(), 
+        __metadata('design:type', EventEmitter)
+    ], ConversationListComponent.prototype, "activeItemIdChange", void 0);
     __decorate([
-        core_1.Output()
-    ], ConversationListComponent.prototype, "onListItemClick");
+        Output(), 
+        __metadata('design:type', EventEmitter)
+    ], ConversationListComponent.prototype, "onListItemClick", void 0);
     __decorate([
-        core_1.Input()
-    ], ConversationListComponent.prototype, "autoHighlight");
+        Input(), 
+        __metadata('design:type', Boolean)
+    ], ConversationListComponent.prototype, "autoHighlight", void 0);
     ConversationListComponent = __decorate([
-        core_1.Component({
+        Component({
             selector: 'ngm-conversation-list',
             styleUrls: ['./conversation-list.component.scss'],
             template: require('./conversation-list.component.html')
-        })
+        }), 
+        __metadata('design:paramtypes', [])
     ], ConversationListComponent);
     return ConversationListComponent;
 }());
-exports.ConversationListComponent = ConversationListComponent;
 //# sourceMappingURL=conversation-list.component.js.map

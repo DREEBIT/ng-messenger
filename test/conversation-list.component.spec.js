@@ -1,13 +1,12 @@
-"use strict";
-const testing_1 = require('@angular/core/testing');
-const src_1 = require('../src');
-const conversation_list_component_1 = require("../src/components/conversation-list/conversation-list.component");
-describe('ngm-conversation-list component', () => {
-    beforeEach(() => {
-        testing_1.TestBed.configureTestingModule({ imports: [src_1.NgMessengerModule.forRoot()] });
+import { TestBed } from '@angular/core/testing';
+import { NgMessengerModule } from '../src';
+import { ConversationListComponent } from "../src/components/conversation-list/conversation-list.component";
+describe('ngm-conversation-list component', function () {
+    beforeEach(function () {
+        TestBed.configureTestingModule({ imports: [NgMessengerModule.forRoot()] });
     });
-    it('should say hello world', () => {
-        const fixture = testing_1.TestBed.createComponent(conversation_list_component_1.ConversationListComponent);
+    it('should say hello world', function () {
+        var fixture = TestBed.createComponent(ConversationListComponent);
         fixture.detectChanges();
     });
 });

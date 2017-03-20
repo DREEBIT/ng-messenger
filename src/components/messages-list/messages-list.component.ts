@@ -1,6 +1,10 @@
-import {OnInit, Component, Input, Output, EventEmitter, OnChanges, SimpleChanges} from "@angular/core";
+import {
+  OnInit, Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild,
+  ElementRef
+} from "@angular/core";
 import {Message} from "../../models/message.model";
 import {Author} from "../../models/author.model";
+import {PagingLoader, LoadPerformer} from "../../classes/paging-loader";
 
 @Component({
   selector: 'ngm-messages-list',
@@ -9,25 +13,51 @@ import {Author} from "../../models/author.model";
 })
 export class MessagesListComponent implements OnInit {
 
-  /**
-   * First Item is at the bottom of the list
-   */
+  @ViewChild('itemList') itemList: ElementRef;
+  @ViewChild('scrollContainer') scrollContainer: ElementRef;
+
   @Input()
-  messages: Message[];
+  loadPerformer: LoadPerformer<Message>;
+
+  loader: PagingLoader<Message>;
 
   @Input()
   author: Author;
 
+  @Output()
+  scrolledToTop: EventEmitter<Message> = new EventEmitter<Message>();
+
+  private messages: Message[] = [];
+
+  private lastTopElement: any;
+
   ngOnInit(): void {
 
-    this.messages = this.analyseItems(this.messages);
+    let me = this;
+    if (this.loadPerformer){
+      this.loader = new PagingLoader<Message>(this.loadPerformer);
+      this.loader.onChange.subscribe((result)=>{
+        this.messages = this.analyseItems(result).concat(this.messages);
+
+        if (me.lastTopElement){
+          this.scrollContainer.nativeElement.scrollTop = me.lastTopElement.getBoundingClientRect().top;
+        }else {
+          setTimeout(()=>{
+            me.scrollContainer.nativeElement.scrollTop = me.scrollContainer.nativeElement.scrollHeight;
+          });
+        }
+
+
+      });
+      this.loader.loadMore(true);
+    }
 
   }
 
 
   analyseItems(items:Message[]):Message[]{
 
-    return items.reverse().map((item, index, array)=>{
+    return items.map((item, index, array)=>{
 
       let message = item;
       let pre = null;
@@ -42,10 +72,9 @@ export class MessagesListComponent implements OnInit {
       }
 
       item.hideAvatar = !this.shouldShowArrow(message, pre, next);
-
       return item;
 
-    })
+    }).reverse()
 
   }
 
@@ -59,4 +88,14 @@ export class MessagesListComponent implements OnInit {
 
     return false;
   }
+
+  onScrolledToMessage(message, index, element){
+
+    this.lastTopElement = this.itemList.nativeElement.firstElementChild;
+    this.scrolledToTop.emit(message);
+    this.loader.loadMore();
+
+  }
+
+
 }

@@ -6,8 +6,10 @@ import {HolderDirective} from "./directives/holder.directive";
 import {MomentModule} from "angular2-moment";
 import {ConversationHeaderComponent} from "./components/conversation-header/conversation-header.component";
 import {MessagesListComponent} from "./components/messages-list/messages-list.component";
-import {ScrollDownDirective} from "./directives/scroll-down.directive";
 import {TooltipDirective} from "./directives/tooltip.directive";
+import {ScrollMonitorDirective} from "./directives/scroll-monitor.directive";
+import {ScrolledTopDirective} from "./directives/scrolled-top.directive";
+
 
 @NgModule({
   declarations: [
@@ -16,8 +18,9 @@ import {TooltipDirective} from "./directives/tooltip.directive";
     ConversationHeaderComponent,
     MessagesListComponent,
     HolderDirective,
-    ScrollDownDirective,
-    TooltipDirective
+    TooltipDirective,
+    ScrollMonitorDirective,
+    ScrolledTopDirective
   ],
   imports: [
     CommonModule,
