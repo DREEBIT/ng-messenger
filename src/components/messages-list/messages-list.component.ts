@@ -37,17 +37,8 @@ export class MessagesListComponent implements OnInit {
     if (this.loadPerformer){
       this.loader = new PagingLoader<Message>(this.loadPerformer);
       this.loader.onChange.subscribe((result)=>{
+        console.log('Concat Messages');
         this.messages = this.analyseItems(result).concat(this.messages);
-
-        if (me.lastTopElement){
-          this.scrollContainer.nativeElement.scrollTop = me.lastTopElement.getBoundingClientRect().top;
-        }else {
-          setTimeout(()=>{
-            me.scrollContainer.nativeElement.scrollTop = me.scrollContainer.nativeElement.scrollHeight;
-          });
-        }
-
-
       });
       this.loader.loadMore(true);
     }
@@ -91,11 +82,17 @@ export class MessagesListComponent implements OnInit {
 
   onScrolledToMessage(message, index, element){
 
-    this.lastTopElement = this.itemList.nativeElement.firstElementChild;
     this.scrolledToTop.emit(message);
     this.loader.loadMore();
 
   }
 
+
+  loadMore(event){
+    if (event.start==0){
+      console.log('Load more');
+      this.loader.loadMore();
+    }
+  }
 
 }

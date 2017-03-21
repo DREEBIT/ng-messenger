@@ -9,7 +9,8 @@ import {MessagesListComponent} from "./components/messages-list/messages-list.co
 import {TooltipDirective} from "./directives/tooltip.directive";
 import {ScrollMonitorDirective} from "./directives/scroll-monitor.directive";
 import {ScrolledTopDirective} from "./directives/scrolled-top.directive";
-
+import { VirtualScrollModule } from 'angular2-virtual-scroll';
+import {MessagesListItemComponent} from "./components/messages-list-item/messages-list-item.component";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {ScrolledTopDirective} from "./directives/scrolled-top.directive";
     ConversationDetailComponent,
     ConversationHeaderComponent,
     MessagesListComponent,
+    MessagesListItemComponent,
     HolderDirective,
     TooltipDirective,
     ScrollMonitorDirective,
@@ -24,7 +26,8 @@ import {ScrolledTopDirective} from "./directives/scrolled-top.directive";
   ],
   imports: [
     CommonModule,
-    MomentModule
+    MomentModule,
+    VirtualScrollModule
   ],
   exports: [
     ConversationListComponent,

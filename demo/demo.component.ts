@@ -31,7 +31,7 @@ export class DemoComponent implements OnInit{
 
   ngOnInit(): void {
 
-    let tmp = conversations.slice(0,50);
+    let tmp = conversations.slice(0,10);
     this.conversationListItems = tmp.map((item)=>{
       return {
         id: item.id,
