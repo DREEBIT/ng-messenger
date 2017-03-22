@@ -20,17 +20,31 @@ var DemoComponent = (function () {
     }
     DemoComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var tmp = conversations.slice(0, 50);
-        this.conversationListItems = tmp.map(function (item) {
-            return {
-                id: item.id,
-                title: item.title,
-                subtitle: item.lastMessage,
-                update: item.update,
-                info: item.info,
-                image: item.image
-            };
-        });
+        this.conversationLoader = {
+            total: -1,
+            performLoad: function (start, limit) {
+                return new rxjs_1.Observable(function (observer) {
+                    _this.conversationLoader.total = conversations.length;
+                    var end = start + limit;
+                    var page = conversations.slice(start, end).map(function (item) {
+                        return {
+                            id: item.id,
+                            title: item.title,
+                            subtitle: item.lastMessage,
+                            update: item.update,
+                            info: item.info,
+                            image: item.image
+                        };
+                    });
+                    setTimeout(function () {
+                        observer.next(page);
+                    }, 1000);
+                    setTimeout(function () {
+                        observer.complete();
+                    }, 2000);
+                });
+            }
+        };
         this.loadPerformer = {
             total: -1,
             performLoad: function (start, limit) {
@@ -60,9 +74,8 @@ var DemoComponent = (function () {
                 });
             }
         };
-        this.conversationDetailItem = this.conversationListItems[0];
+        this.conversationDetailItem = conversations[0];
         this.activeItemId = this.conversationDetailItem.id;
-        this.conversationListItems[2].highlight = true;
     };
     DemoComponent = __decorate([
         core_1.Component({

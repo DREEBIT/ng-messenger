@@ -1,0 +1,30 @@
+textarea.form-control {
+  border: none;
+  overflow: auto;
+  outline: none;
+  resize: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.animated {
+  -webkit-transition: height 0.2s;
+  -moz-transition: height 0.2s;
+  transition: height 0.2s;
+}
+
+.flex {
+  display: flex;
+
+  textarea {
+    display: flex;
+    flex: 1 auto;
+    order: 1;
+  }
+
+  .btn {
+    display: flex;
+    order: 2;
+  }
+}

@@ -1,16 +1,22 @@
 
 import {OnInit, Component, Input, Output, EventEmitter} from "@angular/core";
 import {ConversationListItem} from "../../models/conversation-list-item.model";
+import {PagingLoader, LoadPerformer} from "../../classes/paging-loader";
 
 @Component({
   selector: 'ngm-conversation-list',
   styleUrls: ['./conversation-list.component.scss'],
-  template: require('./conversation-list.component.html')
+  templateUrl: './conversation-list.component.html'
 })
 export class ConversationListComponent implements OnInit {
 
   @Input()
   conversations: ConversationListItem[];
+
+  @Input()
+  loadPerformer: LoadPerformer<ConversationListItem>;
+
+  loader: PagingLoader<ConversationListItem>;
 
   @Input()
   emptyMessage: string = "There are no conversations yet";
@@ -29,6 +35,17 @@ export class ConversationListComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (!this.conversations && this.loadPerformer){
+      this.loader = new PagingLoader(this.loadPerformer);
+      this.loader.onChange.subscribe((result)=>{
+        if (!this.conversations){
+          this.conversations = [];
+        }
+        this.conversations = this.conversations.concat(result);
+      });
+      this.loader.loadMore(true);
+    }
+
   }
 
   private onItemClick(item, event){
@@ -40,6 +57,13 @@ export class ConversationListComponent implements OnInit {
     }
     this.onListItemClick.emit(item);
 
+  }
+
+  loadMore(event){
+    if (event.end >= this.loader.items.length-1){
+      console.log('Load more');
+      this.loader.loadMore();
+    }
   }
 
 }

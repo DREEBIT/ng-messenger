@@ -27,21 +27,45 @@ export class DemoComponent implements OnInit{
 
   loadPerformer: LoadPerformer<Message>;
 
+  conversationLoader: LoadPerformer<ConversationListItem>;
+
   activeItemId: string;
 
   ngOnInit(): void {
 
-    let tmp = conversations.slice(0,10);
-    this.conversationListItems = tmp.map((item)=>{
-      return {
-        id: item.id,
-        title: item.title,
-        subtitle: item.lastMessage,
-        update: item.update,
-        info: item.info,
-        image: item.image
+    this.conversationLoader = {
+      total: -1,
+      performLoad: (start, limit) => {
+
+        return new Observable((observer)=>{
+
+          this.conversationLoader.total = conversations.length;
+          let end = start + limit;
+          let page = conversations.slice(start, end).map(function (item) {
+            return {
+              id: item.id,
+              title: item.title,
+              subtitle: item.lastMessage,
+              update: item.update,
+              info: item.info,
+              image: item.image
+            };
+          });
+
+          setTimeout(()=>{
+            observer.next(page);
+          },1000);
+
+          setTimeout(() => {
+            observer.complete();
+          }, 2000);
+
+        });
+
       }
-    });
+    };
+
+
 
     this.loadPerformer = {
       total: -1,
@@ -79,13 +103,8 @@ export class DemoComponent implements OnInit{
       }
     };
 
-
-
-    this.conversationDetailItem = this.conversationListItems[0];
+    this.conversationDetailItem = conversations[0];
     this.activeItemId = this.conversationDetailItem.id;
-
-
-    this.conversationListItems[2].highlight = true;
 
   }
 }

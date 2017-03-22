@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,32 +8,48 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, Input } from "@angular/core";
-export var ConversationDetailComponent = (function () {
+var core_1 = require("@angular/core");
+var messages_list_component_1 = require("../messages-list/messages-list.component");
+var ConversationDetailComponent = (function () {
     function ConversationDetailComponent() {
     }
     ConversationDetailComponent.prototype.ngOnInit = function () {
     };
+    ConversationDetailComponent.prototype.onPostText = function (value) {
+        this.messagesList.addMessage({
+            id: 'new',
+            text: value,
+            author: this.author,
+            update: new Date(),
+            insert: new Date(),
+            read: false
+        });
+    };
     __decorate([
-        Input(), 
+        core_1.ViewChild('messagesList'), 
+        __metadata('design:type', messages_list_component_1.MessagesListComponent)
+    ], ConversationDetailComponent.prototype, "messagesList", void 0);
+    __decorate([
+        core_1.Input(), 
         __metadata('design:type', Object)
     ], ConversationDetailComponent.prototype, "conversationDetailItem", void 0);
     __decorate([
-        Input(), 
+        core_1.Input(), 
         __metadata('design:type', Object)
     ], ConversationDetailComponent.prototype, "loadPerformer", void 0);
     __decorate([
-        Input(), 
+        core_1.Input(), 
         __metadata('design:type', Object)
     ], ConversationDetailComponent.prototype, "author", void 0);
     ConversationDetailComponent = __decorate([
-        Component({
+        core_1.Component({
             selector: 'ngm-conversation-detail',
             styleUrls: ['./conversation-detail.component.scss'],
-            template: require('./conversation-detail.component.html')
+            templateUrl: './conversation-detail.component.html'
         }), 
         __metadata('design:paramtypes', [])
     ], ConversationDetailComponent);
     return ConversationDetailComponent;
 }());
+exports.ConversationDetailComponent = ConversationDetailComponent;
 //# sourceMappingURL=conversation-detail.component.js.map

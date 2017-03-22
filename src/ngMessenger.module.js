@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,18 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ConversationListComponent } from "./components/conversation-list/conversation-list.component";
-import { ConversationDetailComponent } from "./components/conversation-detail/conversation-detail.component";
-import { HolderDirective } from "./directives/holder.directive";
-import { MomentModule } from "angular2-moment";
-import { ConversationHeaderComponent } from "./components/conversation-header/conversation-header.component";
-import { MessagesListComponent } from "./components/messages-list/messages-list.component";
-import { TooltipDirective } from "./directives/tooltip.directive";
-import { ScrollMonitorDirective } from "./directives/scroll-monitor.directive";
-import { ScrolledTopDirective } from "./directives/scrolled-top.directive";
-export var NgMessengerModule = (function () {
+var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
+var forms_1 = require('@angular/forms');
+var conversation_list_component_1 = require("./components/conversation-list/conversation-list.component");
+var conversation_detail_component_1 = require("./components/conversation-detail/conversation-detail.component");
+var holder_directive_1 = require("./directives/holder.directive");
+var angular2_moment_1 = require("angular2-moment");
+var conversation_header_component_1 = require("./components/conversation-header/conversation-header.component");
+var messages_list_component_1 = require("./components/messages-list/messages-list.component");
+var tooltip_directive_1 = require("./directives/tooltip.directive");
+var angular2_virtual_scroll_1 = require('angular2-virtual-scroll');
+var messages_list_item_component_1 = require("./components/messages-list-item/messages-list-item.component");
+var autosize_textarea_directive_1 = require("./directives/autosize-textarea.directive");
+var message_text_field_component_1 = require("./components/message-text-field/message-text-field.component");
+var scrolldown_directive_1 = require("./directives/scrolldown.directive");
+var NgMessengerModule = (function () {
     function NgMessengerModule() {
     }
     NgMessengerModule.forRoot = function () {
@@ -27,29 +32,34 @@ export var NgMessengerModule = (function () {
         };
     };
     NgMessengerModule = __decorate([
-        NgModule({
+        core_1.NgModule({
             declarations: [
-                ConversationListComponent,
-                ConversationDetailComponent,
-                ConversationHeaderComponent,
-                MessagesListComponent,
-                HolderDirective,
-                TooltipDirective,
-                ScrollMonitorDirective,
-                ScrolledTopDirective
+                conversation_list_component_1.ConversationListComponent,
+                conversation_detail_component_1.ConversationDetailComponent,
+                conversation_header_component_1.ConversationHeaderComponent,
+                messages_list_component_1.MessagesListComponent,
+                messages_list_item_component_1.MessagesListItemComponent,
+                message_text_field_component_1.MessageTextfieldComponent,
+                scrolldown_directive_1.ScrollDownDirective,
+                holder_directive_1.HolderDirective,
+                tooltip_directive_1.TooltipDirective,
+                autosize_textarea_directive_1.AutosizeTextareaDirective
             ],
             imports: [
-                CommonModule,
-                MomentModule
+                common_1.CommonModule,
+                forms_1.FormsModule,
+                angular2_moment_1.MomentModule,
+                angular2_virtual_scroll_1.VirtualScrollModule
             ],
             exports: [
-                ConversationListComponent,
-                MessagesListComponent,
-                ConversationDetailComponent
+                conversation_list_component_1.ConversationListComponent,
+                messages_list_component_1.MessagesListComponent,
+                conversation_detail_component_1.ConversationDetailComponent
             ]
         }), 
         __metadata('design:paramtypes', [])
     ], NgMessengerModule);
     return NgMessengerModule;
 }());
+exports.NgMessengerModule = NgMessengerModule;
 //# sourceMappingURL=ngMessenger.module.js.map

@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Directive, Input, ElementRef } from "@angular/core";
-export var HolderDirective = (function () {
+var core_1 = require("@angular/core");
+var HolderDirective = (function () {
     function HolderDirective(_elementRef) {
         this._elementRef = _elementRef;
         this.config = {};
@@ -49,15 +50,16 @@ export var HolderDirective = (function () {
         return result;
     };
     __decorate([
-        Input(), 
+        core_1.Input(), 
         __metadata('design:type', Object)
     ], HolderDirective.prototype, "config", void 0);
     HolderDirective = __decorate([
-        Directive({
+        core_1.Directive({
             selector: '[ngm-holder]'
         }), 
-        __metadata('design:paramtypes', [ElementRef])
+        __metadata('design:paramtypes', [core_1.ElementRef])
     ], HolderDirective);
     return HolderDirective;
 }());
+exports.HolderDirective = HolderDirective;
 //# sourceMappingURL=holder.directive.js.map

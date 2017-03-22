@@ -5,16 +5,18 @@ import {
 import {Message} from "../../models/message.model";
 import {Author} from "../../models/author.model";
 import {PagingLoader, LoadPerformer} from "../../classes/paging-loader";
+import {DomUtils} from "../../classes/dom.utils";
+import {VirtualScrollComponent} from "angular2-virtual-scroll";
 
 @Component({
   selector: 'ngm-messages-list',
   styleUrls: ['./messages-list.component.scss'],
-  template: require('./messages-list.component.html')
+  templateUrl : './messages-list.component.html'
 })
 export class MessagesListComponent implements OnInit {
 
-  @ViewChild('itemList') itemList: ElementRef;
-  @ViewChild('scrollContainer') scrollContainer: ElementRef;
+  @ViewChild('scrollContainer')
+  scrollContainer: VirtualScrollComponent;
 
   @Input()
   loadPerformer: LoadPerformer<Message>;
@@ -37,8 +39,17 @@ export class MessagesListComponent implements OnInit {
     if (this.loadPerformer){
       this.loader = new PagingLoader<Message>(this.loadPerformer);
       this.loader.onChange.subscribe((result)=>{
-        console.log('Concat Messages');
+        let first = !this.messages || this.messages.length == 0;
         this.messages = this.analyseItems(result).concat(this.messages);
+        if (first){
+          this.scrollDown();
+        }else {
+          if (result.length > 0){
+            let index = this.loader.limit+1;
+            this.scrollTo(index);
+          }
+
+        }
       });
       this.loader.loadMore(true);
     }
@@ -87,12 +98,48 @@ export class MessagesListComponent implements OnInit {
 
   }
 
+  scrollTo(index) {
+
+    requestAnimationFrame(()=>{
+      let element = this.scrollContainer['element']['nativeElement'];
+      let d = this.scrollContainer['calculateDimensions']();
+      let height = Math.floor(index / d.itemsPerRow) *
+        d.childHeight - Math.max(0, (d.itemsPerCol - 1)) * d.childHeight;
+      let positionInfo = element.getBoundingClientRect();
+      height += (positionInfo.height);
+      element.scrollTop = height;
+    });
+
+  }
+
+  scrollDown() {
+
+    requestAnimationFrame(()=>{
+      let element = this.scrollContainer['element']['nativeElement'];
+      DomUtils.scrollDown(element);
+    });
+
+  }
+
+  onEnd(event){
+
+  }
 
   loadMore(event){
-    if (event.start==0){
-      console.log('Load more');
+
+    if (this.messages && event.start==0 && this.messages.length > 1){
       this.loader.loadMore();
     }
+  }
+
+  addMessage(message: Message){
+
+    this.messages.push(message);
+    this.scrollContainer.scrollInto(message);
+    requestAnimationFrame(()=>{
+      this.scrollDown();
+    })
+
   }
 
 }

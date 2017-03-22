@@ -4,7 +4,7 @@ import {ConversationDetailItem} from "../../models/conversation-detail.model";
 @Component({
   selector: 'ngm-conversation-header',
   styleUrls: ['./conversation-header.component.scss'],
-  template: require('./conversation-header.component.html')
+  templateUrl: './conversation-header.component.html'
 })
 export class ConversationHeaderComponent implements OnInit {
 

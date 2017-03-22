@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,27 +8,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from "@angular/core";
-import { PagingLoader } from "../../classes/paging-loader";
-export var MessagesListComponent = (function () {
+var core_1 = require("@angular/core");
+var paging_loader_1 = require("../../classes/paging-loader");
+var dom_utils_1 = require("../../classes/dom.utils");
+var angular2_virtual_scroll_1 = require("angular2-virtual-scroll");
+var MessagesListComponent = (function () {
     function MessagesListComponent() {
-        this.scrolledToTop = new EventEmitter();
+        this.scrolledToTop = new core_1.EventEmitter();
         this.messages = [];
     }
     MessagesListComponent.prototype.ngOnInit = function () {
         var _this = this;
         var me = this;
         if (this.loadPerformer) {
-            this.loader = new PagingLoader(this.loadPerformer);
+            this.loader = new paging_loader_1.PagingLoader(this.loadPerformer);
             this.loader.onChange.subscribe(function (result) {
+                var first = !_this.messages || _this.messages.length == 0;
                 _this.messages = _this.analyseItems(result).concat(_this.messages);
-                if (me.lastTopElement) {
-                    _this.scrollContainer.nativeElement.scrollTop = me.lastTopElement.getBoundingClientRect().top;
+                if (first) {
+                    _this.scrollDown();
                 }
                 else {
-                    setTimeout(function () {
-                        me.scrollContainer.nativeElement.scrollTop = me.scrollContainer.nativeElement.scrollHeight;
-                    });
+                    if (result.length > 0) {
+                        var index = _this.loader.limit + 1;
+                        _this.scrollTo(index);
+                    }
                 }
             });
             this.loader.loadMore(true);
@@ -56,38 +61,68 @@ export var MessagesListComponent = (function () {
         return false;
     };
     MessagesListComponent.prototype.onScrolledToMessage = function (message, index, element) {
-        this.lastTopElement = this.itemList.nativeElement.firstElementChild;
         this.scrolledToTop.emit(message);
         this.loader.loadMore();
     };
+    MessagesListComponent.prototype.scrollTo = function (index) {
+        var _this = this;
+        requestAnimationFrame(function () {
+            var element = _this.scrollContainer['element']['nativeElement'];
+            var d = _this.scrollContainer['calculateDimensions']();
+            var height = Math.floor(index / d.itemsPerRow) *
+                d.childHeight - Math.max(0, (d.itemsPerCol - 1)) * d.childHeight;
+            var positionInfo = element.getBoundingClientRect();
+            height += (positionInfo.height);
+            element.scrollTop = height;
+        });
+    };
+    MessagesListComponent.prototype.scrollDown = function () {
+        var _this = this;
+        requestAnimationFrame(function () {
+            var element = _this.scrollContainer['element']['nativeElement'];
+            dom_utils_1.DomUtils.scrollDown(element);
+        });
+    };
+    MessagesListComponent.prototype.onEnd = function (event) {
+    };
+    MessagesListComponent.prototype.loadMore = function (event) {
+        if (this.messages && event.start == 0 && this.messages.length > 1) {
+            this.loader.loadMore();
+        }
+    };
+    MessagesListComponent.prototype.addMessage = function (message) {
+        var _this = this;
+        this.messages.push(message);
+        this.scrollContainer.scrollInto(message);
+        requestAnimationFrame(function () {
+            _this.scrollDown();
+        });
+    };
     __decorate([
-        ViewChild('itemList'), 
-        __metadata('design:type', ElementRef)
-    ], MessagesListComponent.prototype, "itemList", void 0);
-    __decorate([
-        ViewChild('scrollContainer'), 
-        __metadata('design:type', ElementRef)
+        core_1.ViewChild('scrollContainer'), 
+        __metadata('design:type', angular2_virtual_scroll_1.VirtualScrollComponent)
     ], MessagesListComponent.prototype, "scrollContainer", void 0);
     __decorate([
-        Input(), 
+        core_1.Input(), 
         __metadata('design:type', Object)
     ], MessagesListComponent.prototype, "loadPerformer", void 0);
     __decorate([
-        Input(), 
+        core_1.Input(), 
         __metadata('design:type', Object)
     ], MessagesListComponent.prototype, "author", void 0);
     __decorate([
-        Output(), 
-        __metadata('design:type', EventEmitter)
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
     ], MessagesListComponent.prototype, "scrolledToTop", void 0);
     MessagesListComponent = __decorate([
-        Component({
+        core_1.Component({
             selector: 'ngm-messages-list',
             styleUrls: ['./messages-list.component.scss'],
-            template: require('./messages-list.component.html')
+            templateUrl: './messages-list.component.html'
         }), 
         __metadata('design:paramtypes', [])
     ], MessagesListComponent);
     return MessagesListComponent;
 }());
+exports.MessagesListComponent = MessagesListComponent;
 //# sourceMappingURL=messages-list.component.js.map

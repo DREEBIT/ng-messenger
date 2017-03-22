@@ -3,15 +3,16 @@
   <ngm-conversation-header [conversationDetailItem]="conversationDetailItem"></ngm-conversation-header>
 
   <div class="ngm-conversation-messages-container">
-    <ngm-messages-list [author]="author" [loadPerformer]="loadPerformer"></ngm-messages-list>
+    <ngm-messages-list #messagesList [author]="author" [loadPerformer]="loadPerformer"></ngm-messages-list>
   </div>
 
   <div style="position: absolute; bottom: 0; width: 100%">
-    <nav class="navbar navbar-default" style="margin: 0">
-      <div class="">
 
-      </div>
-    </nav>
+    <div class="bottom-toolbar">
+
+      <ngm-message-textfield (onPostText)="onPostText($event)"></ngm-message-textfield>
+
+    </div>
 
   </div>
 

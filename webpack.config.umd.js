@@ -1,6 +1,6 @@
 "use strict";
-var path = require('path');
 var webpack = require('webpack');
+var path = require('path');
 var angularExternals = require('webpack-angular-externals');
 var rxjsExternals = require('webpack-rxjs-externals');
 var pkg = require('./package.json');
@@ -29,16 +29,16 @@ exports["default"] = {
                 enforce: 'pre'
             }, {
                 test: /\.ts$/,
-                loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
+                loaders: ['awesome-typescript-loader?keepUrl=false', 'angular2-template-loader?keepUrl=false'],
                 exclude: /node_modules/
             }, {
                 test: /\.html$/,
-                loader: 'html-loader',
+                loader: 'html-loader?keepUrl=false',
                 exclude: /node_modules/
             }, {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                loaders: ['raw-loader', 'sass-loader'] // sass-loader not scss-loader
+                loaders: ['raw-loader?keepUrl=false', 'sass-loader?keepUrl=false'] // sass-loader not scss-loader
             }]
     },
     resolve: {

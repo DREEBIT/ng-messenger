@@ -1,11 +1,12 @@
-import { PagingLoader } from "../src/classes/paging-loader";
-import { Observable } from "rxjs";
+"use strict";
+var paging_loader_1 = require("../src/classes/paging-loader");
+var rxjs_1 = require("rxjs");
 describe('paging loader', function () {
     var loaderMock;
     beforeEach(function () {
         loaderMock = {
             performLoad: function (start, limit) {
-                return Observable.create(function (observer) {
+                return rxjs_1.Observable.create(function (observer) {
                     observer.onNext({
                         total: 50,
                         items: [{ id: 'XXX' }]
@@ -16,7 +17,7 @@ describe('paging loader', function () {
         };
     });
     it('base test', function () {
-        var pagingLoader = new PagingLoader(loaderMock, 1);
+        var pagingLoader = new paging_loader_1.PagingLoader(loaderMock, 1);
         // expect(pagingLoader).to.be.true();
     });
 });

@@ -5,7 +5,7 @@ import {Author} from "../../models/author.model";
 @Component({
   selector: 'ngm-messages-list-item',
   styleUrls: ['./messages-list-item.component.scss'],
-  template: require('./messages-list-item.component.html')
+  templateUrl: './messages-list-item.component.html'
 })
 export class MessagesListItemComponent implements OnInit {
 

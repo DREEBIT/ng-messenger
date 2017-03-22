@@ -3,6 +3,15 @@ $conversation-list-item-background-hover: #f1f1f1 !default;
 $conversation-list-item-background-active: #f9f9f9 !default;
 $conversation-list-item-seperator-color: #e9e9e9 !default;
 
+virtual-scroll {
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
 .ngm-conversation-list-item {
 
   div {

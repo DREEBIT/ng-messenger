@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,24 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, Input } from "@angular/core";
-export var ConversationHeaderComponent = (function () {
+var core_1 = require("@angular/core");
+var ConversationHeaderComponent = (function () {
     function ConversationHeaderComponent() {
     }
     ConversationHeaderComponent.prototype.ngOnInit = function () {
     };
     __decorate([
-        Input(), 
+        core_1.Input(), 
         __metadata('design:type', Object)
     ], ConversationHeaderComponent.prototype, "conversationDetailItem", void 0);
     ConversationHeaderComponent = __decorate([
-        Component({
+        core_1.Component({
             selector: 'ngm-conversation-header',
             styleUrls: ['./conversation-header.component.scss'],
-            template: require('./conversation-header.component.html')
+            templateUrl: './conversation-header.component.html'
         }), 
         __metadata('design:paramtypes', [])
     ], ConversationHeaderComponent);
     return ConversationHeaderComponent;
 }());
+exports.ConversationHeaderComponent = ConversationHeaderComponent;
 //# sourceMappingURL=conversation-header.component.js.map

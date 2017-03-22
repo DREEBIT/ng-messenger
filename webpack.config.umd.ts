@@ -1,5 +1,5 @@
-import * as path from 'path';
 import * as webpack from 'webpack';
+import * as path from 'path';
 const angularExternals = require('webpack-angular-externals');
 const rxjsExternals = require('webpack-rxjs-externals');
 const pkg = require('./package.json');
@@ -28,16 +28,16 @@ export default {
       enforce: 'pre'
     }, {
       test: /\.ts$/,
-      loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
+      loaders: ['awesome-typescript-loader?keepUrl=false', 'angular2-template-loader?keepUrl=false'],
       exclude: /node_modules/
     },{
       test: /\.html$/,
-      loader: 'html-loader',
+      loader: 'html-loader?keepUrl=false',
       exclude: /node_modules/
     },{
       test: /\.scss$/,
       exclude: /node_modules/,
-      loaders: ['raw-loader', 'sass-loader'] // sass-loader not scss-loader
+      loaders: ['raw-loader?keepUrl=false', 'sass-loader?keepUrl=false'] // sass-loader not scss-loader
     }]
   },
   resolve: {

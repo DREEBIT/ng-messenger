@@ -1,12 +1,11 @@
-<virtual-scroll [items]="messages" [childHeight]="64" (update)="viewPortItems = $event" (change)="loadMore($event)">
-
-
-  <ngm-messages-list-item *ngFor="let message of viewPortItems; let i = index" [message]="message" [author]="author"></ngm-messages-list-item>
-
+<virtual-scroll #scrollContainer ngm-scroll-down [scrollDownClass]="'scrollable-content'" *ngIf="messages" [items]="messages" [childHeight]="64" (update)="viewPortItems = $event" (end)="onEnd($event)" (change)="loadMore($event)">
 
 
   <div *ngIf="loader.loading" class="loading-indicator text-center">
     <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" aria-hidden="true"></i>
   </div>
+
+  <ngm-messages-list-item *ngFor="let message of viewPortItems; let i = index" [message]="message" [author]="author"></ngm-messages-list-item>
+
 
 </virtual-scroll>
