@@ -26,6 +26,9 @@ export class MessagesListComponent implements OnInit {
   @Input()
   author: Author;
 
+  @Input()
+  hideAuthorName: boolean = false;
+
   @Output()
   scrolledToTop: EventEmitter<Message> = new EventEmitter<Message>();
 
@@ -39,10 +42,17 @@ export class MessagesListComponent implements OnInit {
     if (this.loadPerformer){
       this.loader = new PagingLoader<Message>(this.loadPerformer);
       this.loader.onChange.subscribe((result)=>{
-        let first = !this.messages || this.messages.length == 0;
-        this.messages = this.analyseItems(result).concat(this.messages);
+        let first = this.loader.wasFirst;
         if (first){
-          this.scrollDown();
+          this.messages = this.analyseItems(result.reverse());
+        }else {
+          this.messages = this.analyseItems(result.reverse().concat(this.messages));
+        }
+
+        if (first){
+          if (this.messages.length > 0){
+            this.scrollDown();
+          }
         }else {
           if (result.length > 0){
             let index = this.loader.limit+1;
@@ -74,9 +84,15 @@ export class MessagesListComponent implements OnInit {
       }
 
       item.hideAvatar = !this.shouldShowArrow(message, pre, next);
+      item.hideName = true;
+
+      if (!this.hideAuthorName && item.author.id !== this.author.id){
+        item.hideName = item.hideAvatar;
+      }
+
       return item;
 
-    }).reverse()
+    })
 
   }
 
@@ -98,15 +114,17 @@ export class MessagesListComponent implements OnInit {
 
   }
 
-  scrollTo(index) {
+  scrollTo(index, top = true) {
 
     requestAnimationFrame(()=>{
       let element = this.scrollContainer['element']['nativeElement'];
       let d = this.scrollContainer['calculateDimensions']();
       let height = Math.floor(index / d.itemsPerRow) *
         d.childHeight - Math.max(0, (d.itemsPerCol - 1)) * d.childHeight;
-      let positionInfo = element.getBoundingClientRect();
-      height += (positionInfo.height);
+      if (top){
+        let positionInfo = element.getBoundingClientRect();
+        height += (positionInfo.height);
+      }
       element.scrollTop = height;
     });
 
@@ -116,13 +134,27 @@ export class MessagesListComponent implements OnInit {
 
     requestAnimationFrame(()=>{
       let element = this.scrollContainer['element']['nativeElement'];
-      DomUtils.scrollDown(element);
+      if (this.messages.length > 0){
+        this.scrollContainer.refresh();
+        //@Todo: Einen besseren weg finden für async scroll
+        setTimeout(()=>{
+          DomUtils.scrollDown(element);
+          setTimeout(()=>{
+            DomUtils.scrollDown(element);
+          },100)
+        },0)
+      }
     });
 
   }
 
   onEnd(event){
 
+  }
+
+  reload(){
+    this.messages = [];
+    this.loader.loadMore(true);
   }
 
   loadMore(event){
@@ -134,7 +166,9 @@ export class MessagesListComponent implements OnInit {
 
   addMessage(message: Message){
 
-    this.messages.push(message);
+    let array = this.messages.concat([message]);
+    this.messages = this.analyseItems(array);
+
     this.scrollContainer.scrollInto(message);
     requestAnimationFrame(()=>{
       this.scrollDown();

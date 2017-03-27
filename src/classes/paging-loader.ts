@@ -15,6 +15,7 @@ export class PagingLoader<T> {
   currentSubscription: Subscription = null;
   lastResult: any;
   onChange: EventEmitter<T[]> = new EventEmitter();
+  wasFirst: boolean = false;
 
   constructor(private _loadPerformer: LoadPerformer<T>, public limit: number = 50, autoLoad: boolean = false){
 
@@ -45,6 +46,7 @@ export class PagingLoader<T> {
     }
     this.currentSubscription = this._loadPerformer.performLoad(start, this.limit).subscribe((result: any)=> {
 
+      this.wasFirst = first;
       this.total = this._loadPerformer.total;
       this.loading = false;
       this.lastResult = result;

@@ -12,13 +12,20 @@ var core_1 = require("@angular/core");
 var AutosizeTextareaDirective = (function () {
     function AutosizeTextareaDirective(_elementRef) {
         this._elementRef = _elementRef;
+        this.initHeight = 0;
     }
     AutosizeTextareaDirective.prototype.ngAfterViewInit = function () {
         var el = this._elementRef.nativeElement;
         var autosize = window['autosize'];
+        var jQuery = window['autosize'];
         if (autosize) {
             autosize(el);
         }
+        this.initHeight = el.style.height;
+    };
+    AutosizeTextareaDirective.prototype.reset = function () {
+        var el = this._elementRef.nativeElement;
+        el.style.height = this.initHeight;
     };
     AutosizeTextareaDirective = __decorate([
         core_1.Directive({

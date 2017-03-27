@@ -35,7 +35,7 @@ export class ConversationListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (!this.conversations && this.loadPerformer){
+    if (this.loadPerformer){
       this.loader = new PagingLoader(this.loadPerformer);
       this.loader.onChange.subscribe((result)=>{
         if (!this.conversations){
@@ -43,7 +43,11 @@ export class ConversationListComponent implements OnInit {
         }
         this.conversations = this.conversations.concat(result);
       });
-      this.loader.loadMore(true);
+
+      if (!this.conversations){
+        this.loader.loadMore(true);
+      }
+
     }
 
   }

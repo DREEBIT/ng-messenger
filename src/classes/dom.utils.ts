@@ -29,7 +29,8 @@ export class DomUtils {
 
   static scrollDown(element){
 
-    console.log(element.scrollHeight);
+    console.log('Current Top:',element.scrollTop);
+    console.log('Scroll Height:',element.scrollHeight);
     element.scrollTop = element.scrollHeight;
 
   }

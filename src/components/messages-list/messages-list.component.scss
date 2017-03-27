@@ -1,9 +1,13 @@
 $message-margin-bottom: 20px !default;
 
-.ngm-messages-list {
-  padding: 0 10px;
-}
 
+
+.ngm-messages-list .scrollable-content {
+  top: auto !important;
+  bottom: 0 !important;
+  height: auto !important;
+  max-height: 100% !important;
+}
 
 .loading-indicator {
   padding: 20px 0;

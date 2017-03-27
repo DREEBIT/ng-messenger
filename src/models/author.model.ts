@@ -1,6 +1,8 @@
 
 export interface Author {
   id: string
-  name: string,
+  name: string
   avatar?: string
+  initials?: string
+  color?: string
 }

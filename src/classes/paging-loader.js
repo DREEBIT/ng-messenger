@@ -12,6 +12,7 @@ var PagingLoader = (function () {
         this.complete = false;
         this.currentSubscription = null;
         this.onChange = new core_1.EventEmitter();
+        this.wasFirst = false;
         if (autoLoad) {
             this.loadMore(true);
         }
@@ -34,6 +35,7 @@ var PagingLoader = (function () {
             this.currentSubscription.unsubscribe();
         }
         this.currentSubscription = this._loadPerformer.performLoad(start, this.limit).subscribe(function (result) {
+            _this.wasFirst = first;
             _this.total = _this._loadPerformer.total;
             _this.loading = false;
             _this.lastResult = result;

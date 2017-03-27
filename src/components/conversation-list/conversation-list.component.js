@@ -19,7 +19,7 @@ var ConversationListComponent = (function () {
     }
     ConversationListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        if (!this.conversations && this.loadPerformer) {
+        if (this.loadPerformer) {
             this.loader = new paging_loader_1.PagingLoader(this.loadPerformer);
             this.loader.onChange.subscribe(function (result) {
                 if (!_this.conversations) {
@@ -27,7 +27,9 @@ var ConversationListComponent = (function () {
                 }
                 _this.conversations = _this.conversations.concat(result);
             });
-            this.loader.loadMore(true);
+            if (!this.conversations) {
+                this.loader.loadMore(true);
+            }
         }
     };
     ConversationListComponent.prototype.onItemClick = function (item, event) {

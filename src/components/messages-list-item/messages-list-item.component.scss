@@ -13,6 +13,7 @@ ngm-messages-list-item {
 
 .ngm-message-list-item-wrapper {
   position: relative;
+  padding: 0 10px;
 }
 
 .ngm-message-bubble {
@@ -69,10 +70,22 @@ ngm-messages-list-item {
   }
 }
 
+.ngm-messages-author-name {
+  display: inline-block;
+  margin-top: 10px-$message-margin-bottom;
+  margin-left: -5px;
+  margin-bottom: 10px;
+  z-index: 100;
+  position: relative;
+  font-size: 12px;
+  font-style: italic;
+  color: #818181;
+}
+
 .clear {clear: both}
 .from-me {
 
-  .ngm-messages-avatar {
+  .ngm-messages-avatar, .ngm-messages-author-name {
     float: right;
   }
 
@@ -99,7 +112,7 @@ ngm-messages-list-item {
 }
 .from-them {
 
-  .ngm-messages-avatar {
+  .ngm-messages-avatar, .ngm-messages-author-name {
     float: left;
   }
 
@@ -123,3 +136,5 @@ ngm-messages-list-item {
     }
   }
 }
+
+

@@ -8,4 +8,6 @@ export interface ConversationListItem {
   update?: Date;
   active?: boolean;
   highlight?: boolean;
+  initials?: string;
+  color?: string;
 }

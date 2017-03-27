@@ -54,7 +54,8 @@ var NgMessengerModule = (function () {
             exports: [
                 conversation_list_component_1.ConversationListComponent,
                 messages_list_component_1.MessagesListComponent,
-                conversation_detail_component_1.ConversationDetailComponent
+                conversation_detail_component_1.ConversationDetailComponent,
+                message_text_field_component_1.MessageTextfieldComponent
             ]
         }), 
         __metadata('design:paramtypes', [])

@@ -17,8 +17,11 @@ var HolderDirective = (function () {
     HolderDirective.prototype.ngAfterViewInit = function () {
         if (!this.config)
             this.config = {};
-        if (!this.config.theme)
-            this.config.theme = "sky";
+        if (!this.config.text) {
+            this.config.text = "";
+            this.config.font = "FontAwesome";
+        }
+        //if (!this.config.theme) this.config.theme = "sky";
         if (!this.config.width)
             this.config.width = 50;
         if (!this.config.height)

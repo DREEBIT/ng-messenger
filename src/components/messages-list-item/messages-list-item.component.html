@@ -16,8 +16,11 @@
   </div>
   <div class="clear"></div>
   <div class="ngm-messages-avatar" *ngIf="!message.hideAvatar">
-    <img class="img-circle" src="{{message.avatar}}" *ngIf="message.avatar">
-    <img class="img-circle" *ngIf="!message.avatar" ngm-holder [config]="{text: 'TM', width: 20, height: 20, size: 6}">
+    <img class="img-circle" src="{{message.author.avatar}}" *ngIf="message.avatar">
+    <img class="img-circle" *ngIf="!message.author.avatar" ngm-holder [config]="{text: message.author.initials, bg: message.author.color, width: 20, height: 20, size: 6}">
+  </div>
+  <div class="ngm-messages-author-name" *ngIf="message.author && !message.hideName">
+    <span>{{message.author.name}}</span>
   </div>
   <div class="clear"></div>
 </div>

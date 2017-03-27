@@ -1,11 +1,11 @@
 <div class="ngm-conversation-list">
 
-  <virtual-scroll [items]="conversations" [childHeight]="64" (update)="viewPortItems = $event" (change)="loadMore($event)">
+  <virtual-scroll *ngIf="conversations && conversations.length > 0" [items]="conversations" [childHeight]="64" (update)="viewPortItems = $event" (change)="loadMore($event)">
     <div class="ngm-conversation-list-item" (click)="onItemClick(item, $event)" [ngClass]="{'active': item.id === activeItemId, 'highlight': item.highlight}" *ngFor="let item of viewPortItems">
       <div class="ngm-conversation-list-inner">
         <div class="conversation-list-item-avatar">
           <img class="img-circle" src="{{item.image}}" *ngIf="item.image">
-          <img class="img-circle" *ngIf="!item.image" ngm-holder [config]="{text: 'TM'}">
+          <img class="img-circle" *ngIf="!item.image" ngm-holder [config]="{text: item.initials, bg: item.color}">
         </div>
         <div class="ngm-conversation-body">
           <div class="ngm-conversation-head">
@@ -29,6 +29,10 @@
     </div>
 
   </virtual-scroll>
+
+  <div *ngIf="!conversations || conversations.length === 0" class="text-center">
+    <h3>{{emptyMessage}}</h3>
+  </div>
 
 
 </div>

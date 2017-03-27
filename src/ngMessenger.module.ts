@@ -36,7 +36,8 @@ import {ScrollDownDirective} from "./directives/scrolldown.directive";
   exports: [
     ConversationListComponent,
     MessagesListComponent,
-    ConversationDetailComponent
+    ConversationDetailComponent,
+    MessageTextfieldComponent
   ]
 })
 export class NgMessengerModule {

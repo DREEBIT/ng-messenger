@@ -9,5 +9,6 @@ export interface Message {
   insert: Date;
   update: Date;
   hideAvatar?: boolean;
+  hideName?:boolean;
   cssClass?: string;
 }

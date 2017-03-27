@@ -14,6 +14,7 @@ var dom_utils_1 = require("../../classes/dom.utils");
 var angular2_virtual_scroll_1 = require("angular2-virtual-scroll");
 var MessagesListComponent = (function () {
     function MessagesListComponent() {
+        this.hideAuthorName = false;
         this.scrolledToTop = new core_1.EventEmitter();
         this.messages = [];
     }
@@ -23,10 +24,17 @@ var MessagesListComponent = (function () {
         if (this.loadPerformer) {
             this.loader = new paging_loader_1.PagingLoader(this.loadPerformer);
             this.loader.onChange.subscribe(function (result) {
-                var first = !_this.messages || _this.messages.length == 0;
-                _this.messages = _this.analyseItems(result).concat(_this.messages);
+                var first = _this.loader.wasFirst;
                 if (first) {
-                    _this.scrollDown();
+                    _this.messages = _this.analyseItems(result.reverse());
+                }
+                else {
+                    _this.messages = _this.analyseItems(result.reverse().concat(_this.messages));
+                }
+                if (first) {
+                    if (_this.messages.length > 0) {
+                        _this.scrollDown();
+                    }
                 }
                 else {
                     if (result.length > 0) {
@@ -51,8 +59,12 @@ var MessagesListComponent = (function () {
                 next = array[index + 1];
             }
             item.hideAvatar = !_this.shouldShowArrow(message, pre, next);
+            item.hideName = true;
+            if (!_this.hideAuthorName && item.author.id !== _this.author.id) {
+                item.hideName = item.hideAvatar;
+            }
             return item;
-        }).reverse();
+        });
     };
     MessagesListComponent.prototype.shouldShowArrow = function (message, pre, next) {
         if (!next || next.author.id !== message.author.id) {
@@ -64,15 +76,18 @@ var MessagesListComponent = (function () {
         this.scrolledToTop.emit(message);
         this.loader.loadMore();
     };
-    MessagesListComponent.prototype.scrollTo = function (index) {
+    MessagesListComponent.prototype.scrollTo = function (index, top) {
         var _this = this;
+        if (top === void 0) { top = true; }
         requestAnimationFrame(function () {
             var element = _this.scrollContainer['element']['nativeElement'];
             var d = _this.scrollContainer['calculateDimensions']();
             var height = Math.floor(index / d.itemsPerRow) *
                 d.childHeight - Math.max(0, (d.itemsPerCol - 1)) * d.childHeight;
-            var positionInfo = element.getBoundingClientRect();
-            height += (positionInfo.height);
+            if (top) {
+                var positionInfo = element.getBoundingClientRect();
+                height += (positionInfo.height);
+            }
             element.scrollTop = height;
         });
     };
@@ -80,10 +95,23 @@ var MessagesListComponent = (function () {
         var _this = this;
         requestAnimationFrame(function () {
             var element = _this.scrollContainer['element']['nativeElement'];
-            dom_utils_1.DomUtils.scrollDown(element);
+            if (_this.messages.length > 0) {
+                _this.scrollContainer.refresh();
+                //@Todo: Einen besseren weg finden für async scroll
+                setTimeout(function () {
+                    dom_utils_1.DomUtils.scrollDown(element);
+                    setTimeout(function () {
+                        dom_utils_1.DomUtils.scrollDown(element);
+                    }, 100);
+                }, 0);
+            }
         });
     };
     MessagesListComponent.prototype.onEnd = function (event) {
+    };
+    MessagesListComponent.prototype.reload = function () {
+        this.messages = [];
+        this.loader.loadMore(true);
     };
     MessagesListComponent.prototype.loadMore = function (event) {
         if (this.messages && event.start == 0 && this.messages.length > 1) {
@@ -92,7 +120,8 @@ var MessagesListComponent = (function () {
     };
     MessagesListComponent.prototype.addMessage = function (message) {
         var _this = this;
-        this.messages.push(message);
+        var array = this.messages.concat([message]);
+        this.messages = this.analyseItems(array);
         this.scrollContainer.scrollInto(message);
         requestAnimationFrame(function () {
             _this.scrollDown();
@@ -110,6 +139,10 @@ var MessagesListComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], MessagesListComponent.prototype, "author", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], MessagesListComponent.prototype, "hideAuthorName", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
