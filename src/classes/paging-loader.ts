@@ -1,10 +1,7 @@
 import {Observable, Subscription} from "rxjs";
 import {EventEmitter} from "@angular/core";
+import {PagingLoadPerformer} from "./paging-load-performer";
 
-export interface LoadPerformer<T> {
-    total: number,
-    performLoad(start: number, limit: number):Observable<T[]>
-}
 
 export class PagingLoader<T> {
 
@@ -17,7 +14,7 @@ export class PagingLoader<T> {
   onChange: EventEmitter<T[]> = new EventEmitter();
   wasFirst: boolean = false;
 
-  constructor(private _loadPerformer: LoadPerformer<T>, public limit: number = 50, autoLoad: boolean = false){
+  constructor(private _loadPerformer: PagingLoadPerformer<T>, public limit: number = 50, autoLoad: boolean = false){
 
     if (autoLoad){
       this.loadMore(true);

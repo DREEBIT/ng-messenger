@@ -1,10 +1,11 @@
 import {
   OnInit, Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild,
-  ElementRef
+  ElementRef, ContentChild, ContentChildren, Renderer, AfterViewInit
 } from "@angular/core";
 import {Message} from "../../models/message.model";
 import {Author} from "../../models/author.model";
-import {PagingLoader, LoadPerformer} from "../../classes/paging-loader";
+import {PagingLoader} from "../../classes/paging-loader";
+import {PagingLoadPerformer} from "../../classes/paging-load-performer";
 import {DomUtils} from "../../classes/dom.utils";
 import {VirtualScrollComponent} from "angular2-virtual-scroll";
 
@@ -18,8 +19,14 @@ export class MessagesListComponent implements OnInit {
   @ViewChild('scrollContainer')
   scrollContainer: VirtualScrollComponent;
 
+  @ViewChild('ghostTextContainer')
+  ghostTextContainer: ElementRef;
+
+  @ViewChild('messageListContainer')
+  messageListContainer: ElementRef;
+
   @Input()
-  loadPerformer: LoadPerformer<Message>;
+  loadPerformer: PagingLoadPerformer<Message>;
 
   loader: PagingLoader<Message>;
 
@@ -36,8 +43,13 @@ export class MessagesListComponent implements OnInit {
 
   private lastTopElement: any;
 
-  ngOnInit(): void {
+  constructor(private _elementRef : ElementRef) {
 
+    console.log(this._elementRef);
+
+  }
+
+  ngOnInit(): void {
     let me = this;
     if (this.loadPerformer){
       this.loader = new PagingLoader<Message>(this.loadPerformer);
@@ -63,8 +75,25 @@ export class MessagesListComponent implements OnInit {
       });
       this.loader.loadMore(true);
     }
-
   }
+
+
+  getSize(item, index) {
+    let min = 50;
+
+    console.log(this);
+
+    let ghostContainer = this['element'].nativeElement.parentElement.children[1].children[0];
+    ghostContainer.innerHTML = item.text;
+
+    var positionInfo = ghostContainer.getBoundingClientRect();
+    console.log(positionInfo.height);
+
+    return positionInfo.height > min ? positionInfo.height : min;
+  }
+
+
+
 
 
   analyseItems(items:Message[]):Message[]{
@@ -116,35 +145,35 @@ export class MessagesListComponent implements OnInit {
 
   scrollTo(index, top = true) {
 
-    requestAnimationFrame(()=>{
-      let element = this.scrollContainer['element']['nativeElement'];
-      let d = this.scrollContainer['calculateDimensions']();
-      let height = Math.floor(index / d.itemsPerRow) *
-        d.childHeight - Math.max(0, (d.itemsPerCol - 1)) * d.childHeight;
-      if (top){
-        let positionInfo = element.getBoundingClientRect();
-        height += (positionInfo.height);
-      }
-      element.scrollTop = height;
-    });
+    // requestAnimationFrame(()=>{
+    //   let element = this.scrollContainer['element']['nativeElement'];
+    //   let d = this.scrollContainer['calculateDimensions']();
+    //   let height = Math.floor(index / d.itemsPerRow) *
+    //     d.childHeight - Math.max(0, (d.itemsPerCol - 1)) * d.childHeight;
+    //   if (top){
+    //     let positionInfo = element.getBoundingClientRect();
+    //     height += (positionInfo.height);
+    //   }
+    //   element.scrollTop = height;
+    // });
 
   }
 
   scrollDown() {
 
-    requestAnimationFrame(()=>{
-      let element = this.scrollContainer['element']['nativeElement'];
-      if (this.messages.length > 0){
-        this.scrollContainer.refresh();
-        //@Todo: Einen besseren weg finden für async scroll
-        setTimeout(()=>{
-          DomUtils.scrollDown(element);
-          setTimeout(()=>{
-            DomUtils.scrollDown(element);
-          },100)
-        },0)
-      }
-    });
+    // requestAnimationFrame(()=>{
+    //   let element = this.scrollContainer['element']['nativeElement'];
+    //   if (this.messages.length > 0){
+    //     this.scrollContainer.refresh();
+    //     //@Todo: Einen besseren weg finden für async scroll
+    //     setTimeout(()=>{
+    //       DomUtils.scrollDown(element);
+    //       setTimeout(()=>{
+    //         DomUtils.scrollDown(element);
+    //       },100)
+    //     },0)
+    //   }
+    // });
 
   }
 
@@ -166,10 +195,25 @@ export class MessagesListComponent implements OnInit {
 
   addMessage(message: Message){
 
-    let array = this.messages.concat([message]);
+    let found = this.messages.find((item)=>{
+      return item.id === message.id;
+    });
+
+    let array;
+    if (!found){
+      array = this.messages.concat([message]);
+    }else {
+      let index = this.messages.indexOf(found);
+
+      if (index !== -1) {
+        this.messages[index] = message;
+      }
+      array = this.messages;
+    }
+
+
     this.messages = this.analyseItems(array);
 
-    this.scrollContainer.scrollInto(message);
     requestAnimationFrame(()=>{
       this.scrollDown();
     })

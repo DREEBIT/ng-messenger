@@ -2,7 +2,7 @@ import {OnInit, Component, Input, Output, EventEmitter, ViewChild} from "@angula
 import {ConversationDetailItem} from "../../models/conversation-detail.model";
 import {Message} from "../../models/message.model";
 import {Author} from "../../models/author.model";
-import {LoadPerformer} from "../../classes/paging-loader";
+import {PagingLoadPerformer} from "../../classes/paging-load-performer";
 import {MessagesListComponent} from "../messages-list/messages-list.component";
 
 @Component({
@@ -19,7 +19,7 @@ export class ConversationDetailComponent implements OnInit {
   conversationDetailItem: ConversationDetailItem;
 
   @Input()
-  loadPerformer: LoadPerformer<Message>;
+  loadPerformer: PagingLoadPerformer<Message>;
 
   @Input()
   author: Author;
@@ -31,7 +31,7 @@ export class ConversationDetailComponent implements OnInit {
   onPostText(value){
 
     this.messagesList.addMessage({
-      id: 'new',
+      id: value+new Date(),
       text: value,
       author: this.author,
       update: new Date(),

@@ -13,6 +13,8 @@ import {MessagesListItemComponent} from "./components/messages-list-item/message
 import {AutosizeTextareaDirective} from "./directives/autosize-textarea.directive";
 import {MessageTextfieldComponent} from "./components/message-text-field/message-text-field.component";
 import {ScrollDownDirective} from "./directives/scrolldown.directive";
+import {VsFor} from "./directives/ng2-vs-for.directive";
+import {VirtualScrollComponent} from "./components/virtual-scroll-component/virtual-scroll.component";
 
 @NgModule({
   declarations: [
@@ -25,13 +27,14 @@ import {ScrollDownDirective} from "./directives/scrolldown.directive";
     ScrollDownDirective,
     HolderDirective,
     TooltipDirective,
-    AutosizeTextareaDirective
+    AutosizeTextareaDirective,
+    VirtualScrollComponent,
+    VsFor
   ],
   imports: [
     CommonModule,
     FormsModule,
-    MomentModule,
-    VirtualScrollModule
+    MomentModule
   ],
   exports: [
     ConversationListComponent,

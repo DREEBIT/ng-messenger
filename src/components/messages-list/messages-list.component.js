@@ -5,13 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require("@angular/core");
 var paging_loader_1 = require("../../classes/paging-loader");
 var dom_utils_1 = require("../../classes/dom.utils");
-var angular2_virtual_scroll_1 = require("angular2-virtual-scroll");
 var MessagesListComponent = (function () {
     function MessagesListComponent() {
         this.hideAuthorName = false;
@@ -120,40 +116,46 @@ var MessagesListComponent = (function () {
     };
     MessagesListComponent.prototype.addMessage = function (message) {
         var _this = this;
-        var array = this.messages.concat([message]);
+        var found = this.messages.find(function (item) {
+            return item.id === message.id;
+        });
+        var array;
+        if (!found) {
+            array = this.messages.concat([message]);
+        }
+        else {
+            var index = this.messages.indexOf(found);
+            if (index !== -1) {
+                this.messages[index] = message;
+            }
+            array = this.messages;
+        }
         this.messages = this.analyseItems(array);
-        this.scrollContainer.scrollInto(message);
         requestAnimationFrame(function () {
             _this.scrollDown();
         });
     };
     __decorate([
-        core_1.ViewChild('scrollContainer'), 
-        __metadata('design:type', angular2_virtual_scroll_1.VirtualScrollComponent)
-    ], MessagesListComponent.prototype, "scrollContainer", void 0);
+        core_1.ViewChild('scrollContainer')
+    ], MessagesListComponent.prototype, "scrollContainer");
     __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], MessagesListComponent.prototype, "loadPerformer", void 0);
+        core_1.Input()
+    ], MessagesListComponent.prototype, "loadPerformer");
     __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], MessagesListComponent.prototype, "author", void 0);
+        core_1.Input()
+    ], MessagesListComponent.prototype, "author");
     __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], MessagesListComponent.prototype, "hideAuthorName", void 0);
+        core_1.Input()
+    ], MessagesListComponent.prototype, "hideAuthorName");
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], MessagesListComponent.prototype, "scrolledToTop", void 0);
+        core_1.Output()
+    ], MessagesListComponent.prototype, "scrolledToTop");
     MessagesListComponent = __decorate([
         core_1.Component({
             selector: 'ngm-messages-list',
             styleUrls: ['./messages-list.component.scss'],
             templateUrl: './messages-list.component.html'
-        }), 
-        __metadata('design:paramtypes', [])
+        })
     ], MessagesListComponent);
     return MessagesListComponent;
 }());

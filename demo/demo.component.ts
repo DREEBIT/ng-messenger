@@ -3,7 +3,7 @@ import {ConversationListItem} from "../src/models/conversation-list-item.model";
 import {ConversationDetailItem} from "../src/models/conversation-detail.model";
 import {Message} from "../src/models/message.model";
 import {Author} from "../src/models/author.model";
-import {LoadPerformer} from "../src/classes/paging-loader";
+import {PagingLoadPerformer} from "../src/classes/paging-load-performer";
 import {Observable} from "rxjs";
 const _ = require('lodash');
 
@@ -25,9 +25,9 @@ export class DemoComponent implements OnInit{
     name: 'userA'
   };
 
-  loadPerformer: LoadPerformer<Message>;
+  loadPerformer: PagingLoadPerformer<Message>;
 
-  conversationLoader: LoadPerformer<ConversationListItem>;
+  conversationLoader: PagingLoadPerformer<ConversationListItem>;
 
   activeItemId: string;
 

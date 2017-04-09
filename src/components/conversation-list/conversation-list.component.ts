@@ -1,7 +1,8 @@
 
 import {OnInit, Component, Input, Output, EventEmitter} from "@angular/core";
 import {ConversationListItem} from "../../models/conversation-list-item.model";
-import {PagingLoader, LoadPerformer} from "../../classes/paging-loader";
+import {PagingLoader} from "../../classes/paging-loader";
+import {PagingLoadPerformer} from "../../classes/paging-load-performer";
 
 @Component({
   selector: 'ngm-conversation-list',
@@ -14,7 +15,7 @@ export class ConversationListComponent implements OnInit {
   conversations: ConversationListItem[];
 
   @Input()
-  loadPerformer: LoadPerformer<ConversationListItem>;
+  loadPerformer: PagingLoadPerformer<ConversationListItem>;
 
   loader: PagingLoader<ConversationListItem>;
 
@@ -64,7 +65,7 @@ export class ConversationListComponent implements OnInit {
   }
 
   loadMore(event){
-    if (event.end >= this.loader.items.length-1){
+    if (this.loader && event.end >= this.loader.items.length-1){
       console.log('Load more');
       this.loader.loadMore();
     }

@@ -1,5 +1,5 @@
 <div class="ngm-messages-list">
-  <virtual-scroll #scrollContainer *ngIf="messages" [items]="messages" [childHeight]="44" (update)="viewPortItems = $event" (end)="onEnd($event)" (change)="loadMore($event)">
+  <virtual-scroll #scrollContainer *ngIf="messages" [items]="messages" [heightForIndex]="getSize" (update)="viewPortItems = $event" (end)="onEnd($event)" (change)="loadMore($event)">
 
 
     <div *ngIf="loader.loading" class="loading-indicator text-center">
@@ -10,5 +10,11 @@
 
 
   </virtual-scroll>
+
+  <div class="overflow-size-test-container " style="position: absolute; width: 100%; left: 100%; height: 100%; top: 0;">
+    <p #ghostTextContainer class="ghost-text">
+
+    </p>
+  </div>
 </div>
 
