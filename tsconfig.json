@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES5",
+    "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
+    "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
     "lib": [
       "es2015",

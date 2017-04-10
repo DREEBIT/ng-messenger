@@ -15,15 +15,15 @@ export default {
   },
   module: {
     rules: [{
-      test: /\.ts$/,
+      test: /\.tsx?$/,
       loader: 'tslint-loader?emitErrors=false&failOnHint=false',
       exclude: /node_modules/,
       enforce: 'pre'
     }, {
-      test: /\.ts$/,
-      loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
+      test: /\.tsx?$/,
+      loaders: ['ts-loader', 'angular2-template-loader'],
       exclude: /node_modules/
-    },{
+    }, {
       test: /\.html$/,
       loader: 'html-loader',
       exclude: /node_modules/
@@ -34,7 +34,7 @@ export default {
     }]
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   devServer: {
     port: 8000,
@@ -53,5 +53,9 @@ export default {
       path.join(__dirname, 'src')
     ),
     extractSass
-  ]
+  ],
+  externals: {
+    "react": "React",
+    "react-dom": "ReactDOM"
+  }
 };

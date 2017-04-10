@@ -15,6 +15,7 @@ import {MessageTextfieldComponent} from "./components/message-text-field/message
 import {ScrollDownDirective} from "./directives/scrolldown.directive";
 import {VsFor} from "./directives/ng2-vs-for.directive";
 import {VirtualScrollComponent} from "./components/virtual-scroll-component/virtual-scroll.component";
+import {OnScrollListenerDirective} from "./directives/onScrollListener.directive";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {VirtualScrollComponent} from "./components/virtual-scroll-component/virt
     TooltipDirective,
     AutosizeTextareaDirective,
     VirtualScrollComponent,
+    OnScrollListenerDirective,
     VsFor
   ],
   imports: [

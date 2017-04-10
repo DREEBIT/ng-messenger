@@ -66,7 +66,6 @@ export class ConversationListComponent implements OnInit {
 
   loadMore(event){
     if (this.loader && event.end >= this.loader.items.length-1){
-      console.log('Load more');
       this.loader.loadMore();
     }
   }

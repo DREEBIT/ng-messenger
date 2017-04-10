@@ -18,11 +18,13 @@ var angular2_moment_1 = require("angular2-moment");
 var conversation_header_component_1 = require("./components/conversation-header/conversation-header.component");
 var messages_list_component_1 = require("./components/messages-list/messages-list.component");
 var tooltip_directive_1 = require("./directives/tooltip.directive");
-var angular2_virtual_scroll_1 = require('angular2-virtual-scroll');
 var messages_list_item_component_1 = require("./components/messages-list-item/messages-list-item.component");
 var autosize_textarea_directive_1 = require("./directives/autosize-textarea.directive");
 var message_text_field_component_1 = require("./components/message-text-field/message-text-field.component");
 var scrolldown_directive_1 = require("./directives/scrolldown.directive");
+var ng2_vs_for_directive_1 = require("./directives/ng2-vs-for.directive");
+var virtual_scroll_component_1 = require("./components/virtual-scroll-component/virtual-scroll.component");
+var onScrollListener_directive_1 = require("./directives/onScrollListener.directive");
 var NgMessengerModule = (function () {
     function NgMessengerModule() {
     }
@@ -43,13 +45,15 @@ var NgMessengerModule = (function () {
                 scrolldown_directive_1.ScrollDownDirective,
                 holder_directive_1.HolderDirective,
                 tooltip_directive_1.TooltipDirective,
-                autosize_textarea_directive_1.AutosizeTextareaDirective
+                autosize_textarea_directive_1.AutosizeTextareaDirective,
+                virtual_scroll_component_1.VirtualScrollComponent,
+                onScrollListener_directive_1.OnScrollListenerDirective,
+                ng2_vs_for_directive_1.VsFor
             ],
             imports: [
                 common_1.CommonModule,
                 forms_1.FormsModule,
-                angular2_moment_1.MomentModule,
-                angular2_virtual_scroll_1.VirtualScrollModule
+                angular2_moment_1.MomentModule
             ],
             exports: [
                 conversation_list_component_1.ConversationListComponent,

@@ -9,7 +9,7 @@ export class PagingLoader<T> {
   total: number = -1;
   items: T[] = [];
   complete: boolean = false;
-  currentSubscription: Subscription = null;
+  currentPromise: Promise<any> = null;
   lastResult: any;
   onChange: EventEmitter<T[]> = new EventEmitter();
   wasFirst: boolean = false;
@@ -21,7 +21,7 @@ export class PagingLoader<T> {
     }
   }
 
-  loadMore(first: boolean = false){
+  loadMore(first: boolean = false): Promise<any>{
 
     if ((!first && this.total > -1 && this.items.length >= this.total) || this.loading){
       this.complete = true;
@@ -38,10 +38,8 @@ export class PagingLoader<T> {
 
     let start = this.items.length;
 
-    if (this.currentSubscription){
-      this.currentSubscription.unsubscribe();
-    }
-    this.currentSubscription = this._loadPerformer.performLoad(start, this.limit).subscribe((result: any)=> {
+    let promise = this._loadPerformer.performLoad(start, this.limit).toPromise();
+    this.currentPromise = promise.then((result: any)=> {
 
       this.wasFirst = first;
       this.total = this._loadPerformer.total;
@@ -63,7 +61,7 @@ export class PagingLoader<T> {
       this.loading = false;
     });
 
-    return this.currentSubscription;
+    return promise;
 
   }
 

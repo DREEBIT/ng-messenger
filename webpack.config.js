@@ -16,13 +16,13 @@ exports["default"] = {
     },
     module: {
         rules: [{
-                test: /\.ts$/,
+                test: /\.tsx?$/,
                 loader: 'tslint-loader?emitErrors=false&failOnHint=false',
                 exclude: /node_modules/,
                 enforce: 'pre'
             }, {
-                test: /\.ts$/,
-                loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
+                test: /\.tsx?$/,
+                loaders: ['ts-loader', 'angular2-template-loader'],
                 exclude: /node_modules/
             }, {
                 test: /\.html$/,
@@ -35,7 +35,7 @@ exports["default"] = {
             }]
     },
     resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.tsx', '.js', '.jsx']
     },
     devServer: {
         port: 8000,
@@ -50,6 +50,10 @@ exports["default"] = {
         }),
         new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/, path.join(__dirname, 'src')),
         extractSass
-    ])
+    ]),
+    externals: {
+        "react": "React",
+        "react-dom": "ReactDOM"
+    }
 };
 //# sourceMappingURL=webpack.config.js.map

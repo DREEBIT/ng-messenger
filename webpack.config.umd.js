@@ -23,6 +23,10 @@ exports["default"] = {
     devtool: 'source-map',
     module: {
         rules: [{
+                test: /\.tsx?$/,
+                loader: "awesome-typescript-loader",
+                exclude: /node_modules/
+            }, {
                 test: /\.ts$/,
                 loader: 'tslint-loader?emitErrors=true&failOnHint=true',
                 exclude: /node_modules/,
@@ -42,7 +46,7 @@ exports["default"] = {
             }]
     },
     resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.tsx', '.js']
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({

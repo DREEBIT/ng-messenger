@@ -10,7 +10,7 @@ var PagingLoader = (function () {
         this.total = -1;
         this.items = [];
         this.complete = false;
-        this.currentSubscription = null;
+        this.currentPromise = null;
         this.onChange = new core_1.EventEmitter();
         this.wasFirst = false;
         if (autoLoad) {
@@ -31,10 +31,8 @@ var PagingLoader = (function () {
             this.total = -1;
         }
         var start = this.items.length;
-        if (this.currentSubscription) {
-            this.currentSubscription.unsubscribe();
-        }
-        this.currentSubscription = this._loadPerformer.performLoad(start, this.limit).subscribe(function (result) {
+        var promise = this._loadPerformer.performLoad(start, this.limit).toPromise();
+        this.currentPromise = promise.then(function (result) {
             _this.wasFirst = first;
             _this.total = _this._loadPerformer.total;
             _this.loading = false;
@@ -52,7 +50,7 @@ var PagingLoader = (function () {
         }, function (error) {
             _this.loading = false;
         });
-        return this.currentSubscription;
+        return promise;
     };
     return PagingLoader;
 }());

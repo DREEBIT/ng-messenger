@@ -17,7 +17,7 @@ import {VirtualScrollComponent} from "angular2-virtual-scroll";
 export class MessagesListComponent implements OnInit {
 
   @ViewChild('scrollContainer')
-  scrollContainer: VirtualScrollComponent;
+  scrollContainer: ViewChild;
 
   @ViewChild('ghostTextContainer')
   ghostTextContainer: ElementRef;
@@ -45,7 +45,6 @@ export class MessagesListComponent implements OnInit {
 
   constructor(private _elementRef : ElementRef) {
 
-    console.log(this._elementRef);
 
   }
 
@@ -67,8 +66,8 @@ export class MessagesListComponent implements OnInit {
           }
         }else {
           if (result.length > 0){
-            let index = this.loader.limit+1;
-            this.scrollTo(index);
+            //let index = this.loader.limit+1;
+            this.scrollTo(5);
           }
 
         }
@@ -81,13 +80,11 @@ export class MessagesListComponent implements OnInit {
   getSize(item, index) {
     let min = 50;
 
-    console.log(this);
 
     let ghostContainer = this['element'].nativeElement.parentElement.children[1].children[0];
     ghostContainer.innerHTML = item.text;
 
     var positionInfo = ghostContainer.getBoundingClientRect();
-    console.log(positionInfo.height);
 
     return positionInfo.height > min ? positionInfo.height : min;
   }
@@ -145,35 +142,23 @@ export class MessagesListComponent implements OnInit {
 
   scrollTo(index, top = true) {
 
-    // requestAnimationFrame(()=>{
-    //   let element = this.scrollContainer['element']['nativeElement'];
-    //   let d = this.scrollContainer['calculateDimensions']();
-    //   let height = Math.floor(index / d.itemsPerRow) *
-    //     d.childHeight - Math.max(0, (d.itemsPerCol - 1)) * d.childHeight;
-    //   if (top){
-    //     let positionInfo = element.getBoundingClientRect();
-    //     height += (positionInfo.height);
-    //   }
-    //   element.scrollTop = height;
-    // });
+
+    let items = this.scrollContainer['nativeElement'].childNodes;
+    let element:any = items[index];
+    element.scrollIntoView();
 
   }
 
   scrollDown() {
 
-    // requestAnimationFrame(()=>{
-    //   let element = this.scrollContainer['element']['nativeElement'];
-    //   if (this.messages.length > 0){
-    //     this.scrollContainer.refresh();
-    //     //@Todo: Einen besseren weg finden für async scroll
-    //     setTimeout(()=>{
-    //       DomUtils.scrollDown(element);
-    //       setTimeout(()=>{
-    //         DomUtils.scrollDown(element);
-    //       },100)
-    //     },0)
-    //   }
-    // });
+    requestAnimationFrame(()=>{
+      let element = this.scrollContainer['nativeElement'];
+      if (this.messages.length > 0){
+        setTimeout(()=>{
+          DomUtils.scrollDown(element);
+        },0)
+      }
+    });
 
   }
 
@@ -191,6 +176,12 @@ export class MessagesListComponent implements OnInit {
     if (this.messages && event.start==0 && this.messages.length > 1){
       this.loader.loadMore();
     }
+  }
+
+
+
+  getHeight(){
+    return 50;
   }
 
   addMessage(message: Message){

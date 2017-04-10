@@ -485,7 +485,7 @@ export class VsFor {
 
       this.before.style[layoutProp] = o1 + 'px';
       this.after.style[layoutProp] = (total - o2) + 'px';
-      console.log('updateInnerCollection');
+
       this._changeDetectorRef.markForCheck();
     }
 

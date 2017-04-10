@@ -27,8 +27,6 @@ var DomUtils = (function () {
         return false;
     };
     DomUtils.scrollDown = function (element) {
-        console.log('Current Top:', element.scrollTop);
-        console.log('Scroll Height:', element.scrollHeight);
         element.scrollTop = element.scrollHeight;
     };
     return DomUtils;

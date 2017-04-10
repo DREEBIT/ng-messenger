@@ -1,20 +1,14 @@
 <div class="ngm-messages-list">
-  <virtual-scroll #scrollContainer *ngIf="messages" [items]="messages" [heightForIndex]="getSize" (update)="viewPortItems = $event" (end)="onEnd($event)" (change)="loadMore($event)">
 
-
+  <div class="scroll-container" #scrollContainer
+       ngm-on-scroll-listener (onScrollTop)="loader.loadMore()">
     <div *ngIf="loader.loading" class="loading-indicator text-center">
       <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw" aria-hidden="true"></i>
     </div>
 
-    <ngm-messages-list-item *ngFor="let message of viewPortItems; let i = index" [message]="message" [author]="author"></ngm-messages-list-item>
+    <ngm-messages-list-item *ngFor="let message of messages; let i = index" [message]="message" [author]="author"></ngm-messages-list-item>
 
-
-  </virtual-scroll>
-
-  <div class="overflow-size-test-container " style="position: absolute; width: 100%; left: 100%; height: 100%; top: 0;">
-    <p #ghostTextContainer class="ghost-text">
-
-    </p>
   </div>
-</div>
 
+
+</div>
