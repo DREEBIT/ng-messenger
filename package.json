@@ -6,7 +6,7 @@
   "module": "./index.js",
   "typings": "./index.d.ts",
   "scripts": {
-    "start": "concurrently --raw \"webpack-dev-server --open --host 0.0.0.0\"",
+    "start": "concurrently --raw \"webpack-dev-server --open\"",
     "start-test": "concurrently --raw \"webpack-dev-server --open\" \"npm run test:watch\"",
     "build:demo": "webpack -p",
     "build:umd": "webpack --config webpack.config.umd.ts",

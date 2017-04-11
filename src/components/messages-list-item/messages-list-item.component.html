@@ -12,7 +12,7 @@
        ngm-tooltip [attr.data-toggle]="'tooltip'" [attr.data-placement]="message.author.id === author.id ? 'left': 'right'"
        title="{{ message.insert | amTimeAgo }}"
   >
-    <p>{{message.text}}</p>
+    <p [innerHTML]="message.text | ngmTextInterpreter"></p>
   </div>
   <div class="clear"></div>
   <div class="ngm-messages-avatar" *ngIf="!message.hideAvatar">
