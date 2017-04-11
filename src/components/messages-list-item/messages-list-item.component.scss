@@ -1,3 +1,11 @@
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
 $message-margin-bottom: 20px !default;
 
 ngm-messages-list-item {
@@ -20,13 +28,14 @@ ngm-messages-list-item {
 
   position:relative;
   padding:10px 20px;
+  color:#E5E5EA;
   background:#E5E5EA;
   border-radius:10px;
-  color: black;
 
   p {
     padding: 0;
     margin: 0;
+    color: black;
   }
 
 }
@@ -46,7 +55,7 @@ ngm-messages-list-item {
     position:absolute;
     bottom:-2px;
     height:20px;
-    -webkit-transform:translate(0, -2px);
+    @include transform(translate(0, -2px));
   }
 
   &:after {
@@ -54,7 +63,7 @@ ngm-messages-list-item {
     position:absolute;
     bottom:-2px;
     width:26px;
-    height:20px;
+    height:25px;
     background:white;
   }
 }
@@ -90,23 +99,27 @@ ngm-messages-list-item {
   }
 
   .ngm-message-bubble {
-    color:white;
-    background:#0B93F6;
+    color: #0B93F6;
+    background: #0B93F6;
     float: right;
 
     &:before {
 
-      right:-7px;
-      border-right:20px solid #0B93F6;
+      right: -7px;
+      border-right: 20px solid #0B93F6;
       border-bottom-left-radius: 16px 14px;
     }
 
     &:after {
 
-      z-index:1;
-      right:-56px;
+      z-index: 1;
+      right: -56px;
       border-bottom-left-radius: 10px;
-      -webkit-transform:translate(-30px, -2px);
+      @include transform(translate(-30px, -2px));
+    }
+
+    p {
+      color: white;
     }
   }
 }
@@ -132,7 +145,7 @@ ngm-messages-list-item {
       left:4px;
       background:white;
       border-bottom-right-radius: 10px;
-      -webkit-transform:translate(-30px, -2px);
+      @include transform(translate(-30px, -2px));
     }
   }
 }
