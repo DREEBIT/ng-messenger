@@ -12,11 +12,10 @@ import {MessagesListItemComponent} from "./components/messages-list-item/message
 import {AutosizeTextareaDirective} from "./directives/autosize-textarea.directive";
 import {MessageTextfieldComponent} from "./components/message-text-field/message-text-field.component";
 import {ScrollDownDirective} from "./directives/scrolldown.directive";
-import {VsFor} from "./directives/ng2-vs-for.directive";
-import {VirtualScrollComponent} from "./components/virtual-scroll-component/virtual-scroll.component";
 import {OnScrollListenerDirective} from "./directives/onScrollListener.directive";
 import {TextInterpreterPipe} from "./pipes/text-interpreter.pipe";
 import {MessagesListItemExtraComponent} from "./components/messages-list-item-extra/messages-list-item-extra.component";
+import {VirtualScrollModule} from "angular2-virtual-scroll";
 
 @NgModule({
   declarations: [
@@ -31,12 +30,11 @@ import {MessagesListItemExtraComponent} from "./components/messages-list-item-ex
     HolderDirective,
     TooltipDirective,
     AutosizeTextareaDirective,
-    VirtualScrollComponent,
     OnScrollListenerDirective,
-    TextInterpreterPipe,
-    VsFor
+    TextInterpreterPipe
   ],
   imports: [
+    VirtualScrollModule,
     CommonModule,
     FormsModule,
     MomentModule

@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var forms_1 = require('@angular/forms');
+var core_1 = require("@angular/core");
+var common_1 = require("@angular/common");
+var forms_1 = require("@angular/forms");
 var conversation_list_component_1 = require("./components/conversation-list/conversation-list.component");
 var conversation_detail_component_1 = require("./components/conversation-detail/conversation-detail.component");
 var holder_directive_1 = require("./directives/holder.directive");
@@ -22,9 +22,9 @@ var messages_list_item_component_1 = require("./components/messages-list-item/me
 var autosize_textarea_directive_1 = require("./directives/autosize-textarea.directive");
 var message_text_field_component_1 = require("./components/message-text-field/message-text-field.component");
 var scrolldown_directive_1 = require("./directives/scrolldown.directive");
-var ng2_vs_for_directive_1 = require("./directives/ng2-vs-for.directive");
-var virtual_scroll_component_1 = require("./components/virtual-scroll-component/virtual-scroll.component");
 var onScrollListener_directive_1 = require("./directives/onScrollListener.directive");
+var text_interpreter_pipe_1 = require("./pipes/text-interpreter.pipe");
+var angular2_virtual_scroll_1 = require("angular2-virtual-scroll");
 var NgMessengerModule = (function () {
     function NgMessengerModule() {
     }
@@ -46,11 +46,11 @@ var NgMessengerModule = (function () {
                 holder_directive_1.HolderDirective,
                 tooltip_directive_1.TooltipDirective,
                 autosize_textarea_directive_1.AutosizeTextareaDirective,
-                virtual_scroll_component_1.VirtualScrollComponent,
                 onScrollListener_directive_1.OnScrollListenerDirective,
-                ng2_vs_for_directive_1.VsFor
+                text_interpreter_pipe_1.TextInterpreterPipe
             ],
             imports: [
+                angular2_virtual_scroll_1.VirtualScrollModule,
                 common_1.CommonModule,
                 forms_1.FormsModule,
                 angular2_moment_1.MomentModule
