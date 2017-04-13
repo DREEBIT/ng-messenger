@@ -1,0 +1,12 @@
+.ngm-message-bubble-extra {
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 5px;
+
+  img {
+    border-radius: 10px;
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+  }
+}

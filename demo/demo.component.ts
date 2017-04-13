@@ -54,11 +54,11 @@ export class DemoComponent implements OnInit{
 
           setTimeout(()=>{
             observer.next(page);
-          },1000);
+          }, 100);
 
           setTimeout(() => {
             observer.complete();
-          }, 2000);
+          }, 200);
 
         });
 

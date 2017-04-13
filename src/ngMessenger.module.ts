@@ -16,6 +16,7 @@ import {VsFor} from "./directives/ng2-vs-for.directive";
 import {VirtualScrollComponent} from "./components/virtual-scroll-component/virtual-scroll.component";
 import {OnScrollListenerDirective} from "./directives/onScrollListener.directive";
 import {TextInterpreterPipe} from "./pipes/text-interpreter.pipe";
+import {MessagesListItemExtraComponent} from "./components/messages-list-item-extra/messages-list-item-extra.component";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {TextInterpreterPipe} from "./pipes/text-interpreter.pipe";
     ConversationHeaderComponent,
     MessagesListComponent,
     MessagesListItemComponent,
+    MessagesListItemExtraComponent,
     MessageTextfieldComponent,
     ScrollDownDirective,
     HolderDirective,
@@ -31,8 +33,8 @@ import {TextInterpreterPipe} from "./pipes/text-interpreter.pipe";
     AutosizeTextareaDirective,
     VirtualScrollComponent,
     OnScrollListenerDirective,
-    VsFor,
-    TextInterpreterPipe
+    TextInterpreterPipe,
+    VsFor
   ],
   imports: [
     CommonModule,

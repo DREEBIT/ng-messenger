@@ -6,25 +6,28 @@
   transform: $transforms;
 }
 
-$message-margin-bottom: 20px !default;
-
 ngm-messages-list-item {
   display: block;
 }
 
-.ngm-message-list-item {
-  max-width: 60%;
-  word-wrap: break-word;
-  margin-bottom: 5px;
-  line-height: 24px;
+.ngm-message-list-item-content {
+  max-width: 70%;
+}
+
+.ngm-message-list-item-author {
+  display: block;
+  margin-top: -37px;
 }
 
 .ngm-message-list-item-wrapper {
-  position: relative;
   padding: 0 10px;
 }
 
 .ngm-message-bubble {
+  word-wrap: break-word;
+  display: inline-block;
+  margin-bottom: 5px;
+  line-height: 24px;
 
   position:relative;
   padding:10px 20px;
@@ -40,36 +43,36 @@ ngm-messages-list-item {
 
 }
 
-.from-me .ngm-message-bubble {
+.from-me .ngm-message-list-item-content {
   margin-right: 36px;
 }
 
-.from-them .ngm-message-bubble {
+.from-them .ngm-message-list-item-content {
   margin-left: 36px;
 }
 
 .ngm-message-bubble-arrow {
-  margin-bottom: $message-margin-bottom;
+  margin-bottom: 25px;
+
   &:before {
-    content:"";
-    position:absolute;
-    bottom:-2px;
-    height:20px;
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    height: 20px;
     @include transform(translate(0, -2px));
   }
 
   &:after {
-    content:"";
-    position:absolute;
-    bottom:-2px;
-    width:26px;
-    height:25px;
-    background:white;
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    width: 26px;
+    height: 25px;
+    background: white;
   }
 }
 
 .ngm-messages-avatar {
-  margin-top: -13px-$message-margin-bottom;
   z-index: 100;
   position: relative;
 
@@ -81,10 +84,8 @@ ngm-messages-list-item {
 
 .ngm-messages-author-name {
   display: inline-block;
-  margin-top: 10px-$message-margin-bottom;
-  margin-left: -5px;
-  margin-bottom: 10px;
   z-index: 100;
+  margin-bottom: 10px;
   position: relative;
   font-size: 12px;
   font-style: italic;
@@ -94,24 +95,25 @@ ngm-messages-list-item {
 .clear {clear: both}
 .from-me {
 
-  .ngm-messages-avatar, .ngm-messages-author-name {
+  .ngm-message-list-item-content, .ngm-message-list-item-author {
     float: right;
+  }
+
+  .ngm-message-list-item-content {
+    text-align: right;
   }
 
   .ngm-message-bubble {
     color: #0B93F6;
     background: #0B93F6;
-    float: right;
 
     &:before {
-
       right: -7px;
       border-right: 20px solid #0B93F6;
       border-bottom-left-radius: 16px 14px;
     }
 
     &:after {
-
       z-index: 1;
       right: -56px;
       border-bottom-left-radius: 10px;
@@ -120,17 +122,17 @@ ngm-messages-list-item {
 
     p {
       color: white;
+      text-align: left;
     }
   }
 }
 .from-them {
 
-  .ngm-messages-avatar, .ngm-messages-author-name {
+  .ngm-message-list-item-content, .ngm-message-list-item-author {
     float: left;
   }
 
   .ngm-message-bubble {
-    float: left;
 
     &:before {
       z-index:2;
@@ -149,5 +151,3 @@ ngm-messages-list-item {
     }
   }
 }
-
-

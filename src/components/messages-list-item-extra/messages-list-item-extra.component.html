@@ -1,0 +1,5 @@
+<ng-container *ngIf="imageUrl">
+  <div class="ngm-message-bubble-extra">
+    <img [src]="imageUrl" (error)="imageLoadError($event)">
+  </div>
+</ng-container>

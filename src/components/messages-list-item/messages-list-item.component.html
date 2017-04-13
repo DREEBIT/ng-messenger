@@ -1,27 +1,28 @@
 <div
   class="ngm-message-list-item-wrapper {{message.cssClass}}"
-  [ngClass]="{
-         'from-me': (message.author.id === author.id),
-         'from-them': !(message.author.id === author.id)
-         }"
->
+  [ngClass]="{ 'from-me': (message.author.id === author.id), 'from-them': !(message.author.id === author.id) }">
+  <div class="ngm-message-list-item-content">
+    <ngm-messages-list-item-extra class="ngm-message-bubble-extra" [message]="message"></ngm-messages-list-item-extra>
+    <div class="clear"></div>
+    <div class="ngm-message-bubble"
+         [ngClass]="{'ngm-message-bubble-arrow': !message.hideAvatar}"
+         ngm-tooltip [attr.data-toggle]="'tooltip'" [attr.data-placement]="message.author.id === author.id ? 'left': 'right'"
+         title="{{ message.insert | amTimeAgo }}">
 
-
-  <div class="ngm-message-list-item ngm-message-bubble"
-       [ngClass]="{'ngm-message-bubble-arrow': !message.hideAvatar}"
-       ngm-tooltip [attr.data-toggle]="'tooltip'" [attr.data-placement]="message.author.id === author.id ? 'left': 'right'"
-       title="{{ message.insert | amTimeAgo }}"
-  >
-    <p [innerHTML]="message.text | ngmTextInterpreter"></p>
+      <p [innerHTML]="message.text | ngmTextInterpreter"></p>
+    </div>
+    <div class="clear"></div>
   </div>
   <div class="clear"></div>
-  <div class="ngm-messages-avatar" *ngIf="!message.hideAvatar">
-    <img class="img-circle" src="{{message.author.avatar}}" *ngIf="message.avatar">
-    <img class="img-circle" *ngIf="!message.author.avatar" ngm-holder [config]="{text: message.author.initials, bg: message.author.color, width: 20, height: 20, size: 6}">
-  </div>
-  <div class="ngm-messages-author-name" *ngIf="message.author && !message.hideName">
-    <span>{{message.author.name}}</span>
+  <div class="ngm-message-list-item-author">
+    <div class="ngm-messages-avatar" *ngIf="!message.hideAvatar">
+      <img class="img-circle" src="{{message.author.avatar}}" *ngIf="message?.author?.avatar">
+      <img class="img-circle" *ngIf="!message.author.avatar" ngm-holder [config]="{text: message.author.initials, bg: message.author.color, width: 20, height: 20, size: 6}">
+    </div>
+    <div class="ngm-messages-author-name" *ngIf="message.author && !message.hideName">
+      <span>{{message.author.name}}</span>
+    </div>
   </div>
   <div class="clear"></div>
 </div>
-
+<div class="clear"></div>
