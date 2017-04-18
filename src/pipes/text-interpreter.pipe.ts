@@ -45,6 +45,10 @@ export class TextInterpreterPipe implements PipeTransform {
       {
         regExp: /(\(facepalm\))/ig,
         char: "🤦️"
+      },
+      {
+        regExp: /(\(y\))/ig,
+        char: "👍"
       }
     ]
   };
