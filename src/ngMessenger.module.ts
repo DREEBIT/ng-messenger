@@ -16,6 +16,7 @@ import {OnScrollListenerDirective} from "./directives/onScrollListener.directive
 import {TextInterpreterPipe} from "./pipes/text-interpreter.pipe";
 import {MessagesListItemExtraComponent} from "./components/messages-list-item-extra/messages-list-item-extra.component";
 import {VirtualScrollModule} from "angular2-virtual-scroll";
+import {VsFor} from "./directives/ng2-vs-for.directive";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {VirtualScrollModule} from "angular2-virtual-scroll";
     TooltipDirective,
     AutosizeTextareaDirective,
     OnScrollListenerDirective,
-    TextInterpreterPipe
+    TextInterpreterPipe,
+    VsFor
   ],
   imports: [
     VirtualScrollModule,

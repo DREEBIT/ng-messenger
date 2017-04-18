@@ -27,6 +27,18 @@ export class TextInterpreterPipe implements PipeTransform {
         char: "😊"
       },
       {
+        regExp: /(:-?\(|\(worried\)|\(concern\))/ig,
+        char: "😟"
+      },
+      {
+        regExp: /(:-?\/|\(confused\)|\(weird\))/ig,
+        char: "😕"
+      },
+      {
+        regExp: /(:-?8|\(cool\))/ig,
+        char: "😎"
+      },
+      {
         regExp: /(:-?D)/ig,
         char: "😂"
       },
@@ -47,11 +59,29 @@ export class TextInterpreterPipe implements PipeTransform {
         char: "🤦️"
       },
       {
-        regExp: /(\(y\))/ig,
+        regExp: /(\(y\)|\(thumbsup\)|\(yes\)|\(like\))/ig,
         char: "👍"
+      },
+      {
+        regExp: /(\(n\)|\(thumbsdown\)|\(no\)|\(dislike\))/ig,
+        char: "👎"
+      },
+      {
+        regExp: /(\(ok\)|\(perfect\))/ig,
+        char: "👌"
+      },
+      {
+        regExp: /(\(unicorn\)|\(mystical\))/ig,
+        char: "🦄"
+      },
+      {
+        regExp: /(\(atom\))/ig,
+        char: "⚛"
       }
     ]
   };
+
+  // more mappings: https://github.com/muan/emojilib/blob/master/emojis.json
 
   public transform(text: string, options?: TextInterpreterOptions): string {
     options = options || {};
