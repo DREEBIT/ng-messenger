@@ -34,6 +34,7 @@ export class MessageTextfieldComponent implements OnInit {
   }
 
   onEnter(value, event){
+    if (!this.text) return;
 
     this.onPostText.emit(this.text);
     this.text = '';
@@ -41,7 +42,6 @@ export class MessageTextfieldComponent implements OnInit {
     this.textareas.forEach((item)=>{
       item.reset();
     });
-
   }
 
 }
