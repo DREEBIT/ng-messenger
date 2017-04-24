@@ -1,4 +1,5 @@
 import {Pipe, PipeTransform} from "@angular/core";
+import {MessageOptions} from "../services/message-options";
 
 export interface EmojiMapper {
   regExp: RegExp,
@@ -82,6 +83,13 @@ export class TextInterpreterPipe implements PipeTransform {
   };
 
   // more mappings: https://github.com/muan/emojilib/blob/master/emojis.json
+
+  constructor(private _messageOptions: MessageOptions) {
+    this.defaultOptions.emojiMapping = [
+      ...this.defaultOptions.emojiMapping,
+      ..._messageOptions.emojiMapping
+    ];
+  }
 
   public transform(text: string, options?: TextInterpreterOptions): string {
     options = options || {};

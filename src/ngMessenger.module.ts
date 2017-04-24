@@ -17,6 +17,7 @@ import {TextInterpreterPipe} from "./pipes/text-interpreter.pipe";
 import {MessagesListItemExtraComponent} from "./components/messages-list-item-extra/messages-list-item-extra.component";
 import {VirtualScrollModule} from "angular2-virtual-scroll";
 import {VsFor} from "./directives/ng2-vs-for.directive";
+import {MessageOptions} from "./services/message-options";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ export class NgMessengerModule {
 
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: NgMessengerModule
+      ngModule: NgMessengerModule,
+      providers: [MessageOptions]
     };
   }
 
