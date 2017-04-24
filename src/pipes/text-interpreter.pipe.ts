@@ -2,13 +2,13 @@ import {Pipe, PipeTransform} from "@angular/core";
 import {MessageOptions} from "../services/message-options";
 
 export interface EmojiMapper {
-  regExp: RegExp,
-  char: string
+  regExp: RegExp;
+  char: string;
 }
 export interface TextInterpreterOptions {
-  url?: boolean,
-  emoji?: boolean,
-  emojiMapping?: EmojiMapper[]
+  url?: boolean;
+  emoji?: boolean;
+  emojiMapping?: EmojiMapper[];
 }
 
 export const REGULAR_EXPRESSION_URL: RegExp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
@@ -19,7 +19,7 @@ export const REGULAR_EXPRESSION_URL: RegExp = /(\b(https?|ftp|file):\/\/[-A-Z0-9
 })
 export class TextInterpreterPipe implements PipeTransform {
 
-  defaultOptions: TextInterpreterOptions = {
+  private defaultOptions: TextInterpreterOptions = {
     url: true,
     emoji: true,
     emojiMapping: [

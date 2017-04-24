@@ -1,5 +1,5 @@
-
 import {Author} from "./author.model";
+
 export interface Message {
   //Message is written by one's self
   author: Author;

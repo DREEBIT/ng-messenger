@@ -1,13 +1,9 @@
-import {
-  OnInit, Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild,
-  ElementRef, ContentChild, ContentChildren, Renderer, AfterViewInit
-} from "@angular/core";
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
 import {Message} from "../../models/message.model";
 import {Author} from "../../models/author.model";
 import {PagingLoader} from "../../classes/paging-loader";
 import {PagingLoadPerformer} from "../../classes/paging-load-performer";
 import {DomUtils} from "../../classes/dom.utils";
-import {VirtualScrollComponent} from "angular2-virtual-scroll";
 
 @Component({
   selector: 'ngm-messages-list',

@@ -1,7 +1,4 @@
-import {
-  OnInit, Component, Output, EventEmitter, Input, ViewChild, ViewRef, ElementRef,
-  ViewChildren, QueryList
-} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from "@angular/core";
 import {AutosizeTextareaDirective} from "../../directives/autosize-textarea.directive";
 
 @Component({

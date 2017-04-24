@@ -1,4 +1,4 @@
-import {OnInit, Component, Input} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {Message} from "../../models/message.model";
 
 export const REGULAR_EXPRESSION_IMAGE: RegExp = /(https?:\/\/.*?\.(?:png|jpe?g|gif))/ig;

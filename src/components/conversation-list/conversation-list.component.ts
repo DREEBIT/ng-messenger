@@ -1,5 +1,4 @@
-
-import {OnInit, Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {ConversationListItem} from "../../models/conversation-list-item.model";
 import {PagingLoader} from "../../classes/paging-loader";
 import {PagingLoadPerformer} from "../../classes/paging-load-performer";

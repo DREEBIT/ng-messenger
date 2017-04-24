@@ -1,13 +1,13 @@
 import {
+  ChangeDetectorRef,
   Directive,
-  ViewContainerRef,
-  TemplateRef,
   ElementRef,
-  Renderer,
   EmbeddedViewRef,
   NgZone,
-  ChangeDetectorRef,
-} from '@angular/core';
+  Renderer,
+  TemplateRef,
+  ViewContainerRef
+} from "@angular/core";
 
 const dde:any = document.documentElement,
   matchingFunction = dde.matches ? 'matches' :

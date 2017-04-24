@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, Input, ElementRef} from "@angular/core";
+import {AfterViewInit, Directive, ElementRef} from "@angular/core";
 
 @Directive({
   selector: '[ngm-autosize-textarea]'

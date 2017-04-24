@@ -1,4 +1,4 @@
-import {OnInit, Component, Input, Output, EventEmitter, ViewChild} from "@angular/core";
+import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {ConversationDetailItem} from "../../models/conversation-detail.model";
 import {Message} from "../../models/message.model";
 import {Author} from "../../models/author.model";

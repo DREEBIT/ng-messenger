@@ -1,4 +1,4 @@
-import {OnInit, Component, Input, ChangeDetectionStrategy} from "@angular/core";
+import {ChangeDetectionStrategy, Component, Input, OnInit} from "@angular/core";
 import {Message} from "../../models/message.model";
 import {Author} from "../../models/author.model";
 

@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, ElementRef, EventEmitter, Input, Output} from "@angular/core";
+import {AfterViewInit, Directive, ElementRef, EventEmitter, Output} from "@angular/core";
 
 @Directive({
   selector: '[ngm-on-scroll-listener]'
