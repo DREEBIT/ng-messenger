@@ -31,7 +31,7 @@ export class TextInterpreterPipe implements PipeTransform {
         char: "😟"
       },
       {
-        regExp: /(:-?\/|\(confused\)|\(weird\))/ig,
+        regExp: /(:-?\/(?!\/)|\(confused\)|\(weird\))/ig,
         char: "😕"
       },
       {
