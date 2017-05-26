@@ -14,6 +14,9 @@ export class MessagesListItemComponent implements OnInit {
   message: Message;
 
   @Input()
+  enableTooltip: boolean = true;
+
+  @Input()
   author: Author;
 
   ngOnInit(): void {

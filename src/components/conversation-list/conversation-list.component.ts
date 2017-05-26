@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from "@angular/core";
 import {ConversationListItem} from "../../models/conversation-list-item.model";
 import {PagingLoader} from "../../classes/paging-loader";
 import {PagingLoadPerformer} from "../../classes/paging-load-performer";
+import {VirtualScrollComponent} from "angular2-virtual-scroll";
 
 @Component({
   selector: 'ngm-conversation-list',
@@ -9,6 +10,9 @@ import {PagingLoadPerformer} from "../../classes/paging-load-performer";
   templateUrl: './conversation-list.component.html'
 })
 export class ConversationListComponent implements OnInit {
+
+  @ViewChild('virtualScrollContainer')
+  virtualScrollContainer: VirtualScrollComponent;
 
   @Input()
   conversations: ConversationListItem[];
@@ -32,6 +36,8 @@ export class ConversationListComponent implements OnInit {
 
   @Input()
   autoHighlight: boolean = true;
+
+
 
   ngOnInit(): void {
 

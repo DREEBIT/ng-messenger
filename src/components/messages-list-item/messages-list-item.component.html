@@ -6,7 +6,7 @@
     <div class="clear"></div>
     <div class="ngm-message-bubble"
          [ngClass]="{'ngm-message-bubble-arrow': !message.hideAvatar}"
-         ngm-tooltip [attr.data-toggle]="'tooltip'" [attr.data-placement]="message.author.id === author.id ? 'left': 'right'"
+         ngm-tooltip [attr.data-toggle]="'tooltip'" [attr.data-placement]="message.author.id === author.id ? 'left': 'right'" [enableTooltip]="enableTooltip"
          title="{{ message.insert | amTimeAgo }}">
 
       <p [innerHTML]="message.text | ngmTextInterpreter"></p>
@@ -21,6 +21,7 @@
     </div>
     <div class="ngm-messages-author-name" *ngIf="message.author && !message.hideName">
       <span>{{message.author.name}}</span>
+      <span *ngIf="!enableTooltip">{{ message.insert | amTimeAgo }}</span>
     </div>
   </div>
   <div class="clear"></div>

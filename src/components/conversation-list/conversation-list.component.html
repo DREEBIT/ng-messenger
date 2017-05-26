@@ -1,6 +1,6 @@
 <div class="ngm-conversation-list">
 
-  <virtual-scroll *ngIf="conversations && conversations.length > 0" [items]="conversations" [childHeight]="64" (update)="viewPortItems = $event" (change)="loadMore($event)">
+  <virtual-scroll #virtualScrollContainer *ngIf="conversations && conversations.length > 0" [items]="conversations" [childHeight]="64" (update)="viewPortItems = $event" (change)="loadMore($event)">
     <div class="ngm-conversation-list-item" (click)="onItemClick(item, $event)" [ngClass]="{'active': item.id === activeItemId, 'highlight': item.highlight}" *ngFor="let item of viewPortItems">
       <div class="ngm-conversation-list-inner">
         <div class="conversation-list-item-avatar">

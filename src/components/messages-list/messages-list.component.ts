@@ -24,6 +24,9 @@ export class MessagesListComponent implements OnInit {
   @Input()
   loadPerformer: PagingLoadPerformer<Message>;
 
+  @Input()
+  enableTooltips: boolean = true;
+
   loader: PagingLoader<Message>;
 
   @Input()
@@ -35,7 +38,7 @@ export class MessagesListComponent implements OnInit {
   @Output()
   scrolledToTop: EventEmitter<Message> = new EventEmitter<Message>();
 
-  private messages: Message[] = [];
+  public messages: Message[] = [];
 
   private lastTopElement: any;
 

@@ -37,7 +37,7 @@ export class ConversationDetailComponent implements OnInit {
       update: new Date(),
       insert: new Date(),
       read: false
-    })
+    });
 
   }
 
